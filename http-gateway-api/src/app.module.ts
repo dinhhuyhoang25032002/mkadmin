@@ -15,7 +15,7 @@ import { CoursesModule } from './courses/courses.module';
       {
         isGlobal: true,
         expandVariables: true,
-        envFilePath: '.env'
+        envFilePath: '.env.development.local'
       }
     ), NatsClientModule,
     FirebaseModule,

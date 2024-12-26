@@ -9,7 +9,7 @@ export type nodeIdProps = {
 export type UserProps = {
     fullname: string;
     role: string;
-    accessToken: string;
+    accessToken?: string;
     _id: string;
     email: string;
     address?: string;

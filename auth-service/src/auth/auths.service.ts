@@ -105,7 +105,7 @@ export class AuthsService {
     async handleGetInfor(query: { id: string, email: string }) {
         const { id, email } = query
         const { refreshToken } = await getToken(id, email);
-        const data = await this.userModel.findById(id).populate({ path: 'nodeiots' }).exec();
+        const data = await this.userModel.findById(id).populate({ path: 'nodeId' }).exec();
         return {
             data, refreshToken
         }

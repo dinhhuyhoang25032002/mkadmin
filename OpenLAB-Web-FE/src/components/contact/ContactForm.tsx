@@ -68,11 +68,7 @@ const ContactForm = () => {
           <section className="space-y-4 bg-white h-fit px-5  rounded-md xs:px-0">
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  form.handleSubmit(onSubmit);
-                }
-              }}
+             
               className="space-y-5 h-fit py-4 "
             >
               <div className="flex justify-between gap-5 ">

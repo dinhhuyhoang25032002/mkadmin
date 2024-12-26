@@ -15,3 +15,8 @@ export const handleContact = (values: { email: string, phone: string, name: stri
     const { email, phone, name, topic, content } = values
     return http.post('contact-mailer/support', { email, phone, name, topic, content })
 }
+
+// update user info
+export const handleUpdateUserInfo = (info: { fullname: string, email: string, address: string, dateOfBirth: string }) => {
+    return http.put('users', info)
+}

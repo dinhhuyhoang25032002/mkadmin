@@ -53,7 +53,7 @@ export type SubmitValueDeviceBodyType = z.TypeOf<typeof SubmitValueDeviceBody>;
 
 // submit user info
 export const SubmitUserInfoBody = z.object({
-    fullName: z.string().min(2).max(125),
+    fullname: z.string().min(2).max(125),
     email: z.string().email(),
     address: z.string().min(5).max(255),
     dateOfBirth: z.string().min(10).max(10),

@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { User, USER_MODEL } from 'src/schemas/users.schema';
 import { SoftDeleteModel } from 'mongoose-delete';
 import { NodeIoT, NODEIOT_MODEL } from 'src/schemas/nodeiot.schema';
+import { PartialUser } from 'src/users/class/User.class';
 @Injectable()
 export class UsersService {
     constructor(
@@ -27,6 +28,14 @@ export class UsersService {
             return { message: 'Not found user' }
         }
         delete user.password
+        return user
+    }
+
+    async handleUpdateUserInfo(info: PartialUser) {
+        const user = await this.userModel.findOneAndUpdate({ email: info.email }, info, { new: true }).exec();
+        if (!user) {
+            return { message: 'Not found user' }
+        }
         return user
     }
 }

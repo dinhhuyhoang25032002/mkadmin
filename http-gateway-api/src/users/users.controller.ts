@@ -1,7 +1,8 @@
 
 import { ClientProxy } from '@nestjs/microservices';
-import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Patch, Query, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Patch, Put, Query, Res } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
+import { PartialUser } from 'src/users/class/User.class';
 @Controller('users')
 export class UsersController {
     constructor(@Inject('NATS_SERVICE') private natsClient: ClientProxy) { }
@@ -12,6 +13,11 @@ export class UsersController {
         return {
             success: true,
         };
+    }
+    @Put()
+    @HttpCode(HttpStatus.OK)
+    async updateUserInfo(@Body() info:PartialUser) {
+        return this.natsClient.send('handleUpdateUserInfo', info);
     }
 
     @Get()
