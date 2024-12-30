@@ -4,7 +4,7 @@ import { FaAddressCard } from "react-icons/fa";
 import Link from "next/link";
 import { IoCalculatorOutline } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
-import { MdEditCalendar } from "react-icons/md";
+// import { MdEditCalendar } from "react-icons/md";
 import { FiShoppingCart } from "react-icons/fi";
 import { LuBellRing } from "react-icons/lu";
 import { handleLogout } from "~/services/Services";
@@ -84,13 +84,13 @@ export default function RightContentHeader() {
                           Thông tin cá nhân
                         </CommandItem>
                       </Link>
-
+{/* 
                       <Link href="/products/courses/search-course">
                         <CommandItem className="flex items-center gap-2 cursor-pointer">
                           <MdEditCalendar />
                           Thông tin khóa học
                         </CommandItem>
-                      </Link>
+                      </Link> */}
                       <Link href="/products/dashboard">
                         <CommandItem className="flex items-center gap-2 cursor-pointer">
                           <IoCalculatorOutline />

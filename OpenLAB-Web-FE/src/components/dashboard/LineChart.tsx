@@ -58,7 +58,7 @@ export function LineChartComponent({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className=" text-xl font-semibold">
+        <CardTitle className="text-xl font-semibold xs:text-lg">
           {title}: {getValue()}
         </CardTitle>
         <CardDescription>
@@ -83,11 +83,12 @@ export function LineChartComponent({
             <CartesianGrid vertical={true} />
             <XAxis
               dataKey="x"
-              tickLine={false}
+              tickLine={true}
               axisLine={false}
-              tickMargin={8}
+              tickMargin={15}
               interval={0}
-              tickFormatter={(value) => value.slice(0, 5)}
+              padding={{ left: 2, right: 4 }}
+              tickFormatter={(value) => value}
             />
             <ChartTooltip
               cursor={false}

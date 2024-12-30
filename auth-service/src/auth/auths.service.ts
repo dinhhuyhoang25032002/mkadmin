@@ -18,13 +18,15 @@ export class AuthsService {
         return user;
     }
 
-    async createOneUser(user: PartialUser) {
-        let { email, password } = user
+    async createOneUser(user: { email: string, password: string, fullname: string }) {
+        const { email, password, fullname } = user
         if (!email || !password) {
             return new BadRequestException('Email or Password not empty');
         }
         const userExist = await this.userModel.findOne({ email: email })
         if (!userExist) {
+            console.log(user);
+
             const passwordhard = await hardData(password);
             const UserSave = {
                 ...user,
@@ -105,7 +107,8 @@ export class AuthsService {
     async handleGetInfor(query: { id: string, email: string }) {
         const { id, email } = query
         const { refreshToken } = await getToken(id, email);
-        const data = await this.userModel.findById(id).populate({ path: 'nodeId' }).exec();
+        const data = await this.userModel.findById(id).populate({ path: 'nodeId' })
+            .exec();
         return {
             data, refreshToken
         }

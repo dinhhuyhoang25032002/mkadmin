@@ -1,8 +1,8 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { PartialUser, UserClass } from 'src/users/class/User.class';
+import { PartialUser, } from 'src/users/class/User.class';
 import { firstValueFrom } from 'rxjs';
-import { Response, Request, query } from 'express';
+import { Response, Request, } from 'express';
 import { JwtRefreshAuthGuard } from 'src/auth/guard/refreshToken.guard';
 import { GoogleAuthGuard } from 'src/auth/guard/google.guard';
 import { UserFromGoogle } from 'src/types/CustomType';
@@ -21,8 +21,9 @@ export class AuthsController {
 
     @Post('sign-up')
     @HttpCode(HttpStatus.CREATED)
-    async create(@Body() user: UserClass) {
-        return await firstValueFrom(this.natsClient.send('handleRegister', user))
+    async create(@Body() user: { fullname: string, email: string, password: string }) {
+        console.log(user);
+        return this.natsClient.send('handleRegister', user)
     }
 
     @HttpCode(HttpStatus.OK)
@@ -75,7 +76,7 @@ export class AuthsController {
             data, refreshToken
         } = await firstValueFrom(this.natsClient.send('handleGetInfor', query));
         console.log(refreshToken);
-        
+
         res.cookie('token', refreshToken,
             { httpOnly: true, secure: true, sameSite: "none", expires: new Date(Date.now() + 604800000), partitioned: true, domain: 'localhost' });
 

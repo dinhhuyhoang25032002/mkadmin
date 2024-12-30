@@ -8,7 +8,7 @@ export class UsersController {
 
     @EventPattern('handleAddValue')
     async handleAddValue(@Payload() payload: { temperature: string, humidy: string, light: string, nodeId: string }) {
-        // console.log(payload);
+         console.log(payload);
 
         return this.usersService.handleAddValue(payload)
     }

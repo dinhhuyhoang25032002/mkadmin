@@ -53,7 +53,7 @@ export default function DashboardParams() {
   useEffect(() => {
     if (!_id || !isNode) return;
     const date = moment().startOf("day").valueOf() / 1000;
-    const now = new Date().toLocaleTimeString();
+
     const urlTemperature = `/${_id}/${isNode}/dailyTemperature/${date}/highestTemperature`;
     const dataRef = ref(database, urlTemperature);
     let maxTemperature = 0;
@@ -68,6 +68,7 @@ export default function DashboardParams() {
         maxTemperature = currentValue;
         set(dataRefMax, maxTemperature);
       }
+      const now = new Date().toLocaleTimeString();
       setTimestampsTemperature((prev) => {
         const newTimestamps = [...prev, now];
         return newTimestamps.length >= 10
@@ -92,32 +93,48 @@ export default function DashboardParams() {
   }, [_id, isNode]);
 
   useEffect(() => {
+    let nameNode = 0
     const sendNotification = async () => {
       const foundItem = nodeId?.find(
-        (item) => item._id === isNode
+        (item, index) => {
+          nameNode = index + 1;
+         return item._id === isNode
+        }
       ) as nodeIdProps;
       if (!foundItem) return;
       const { temperature, humidy, light } = foundItem;
-      if (temperatureHistory && temperatureHistory.length === 10) {
+      if (temperatureHistory && temperatureHistory.length === 9) {
         const averageValue = getAverage(temperatureHistory);
+        console.log("giá trị tb", averageValue);
+
         if (averageValue >= parseFloat(temperature)) {
-          await fetch("/contact-mailer/notification", {
-            method: "POST",
-            body: JSON.stringify({
-              email: email,
-              value: averageValue,
-              nodeId: isNode,
-              type: "Nhiệt độ",
-            }),
-          });
+          const data = await fetch(
+            "https://localhost:3001/contact-mailer/notification",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json", // Sử dụng "Content-Type" thay vì "contentType"
+              },
+              body: JSON.stringify({
+                email: email,
+                value: averageValue,
+                nodeId: `Node ${nameNode}`,
+                type: "Nhiệt độ",
+              }),
+            }
+          );
+          console.log(data);
         }
       }
 
-      if (humidityHistory && humidityHistory.length === 10) {
+      if (humidityHistory && humidityHistory.length === 9) {
         const averageValue = getAverage(humidityHistory);
         if (averageValue >= parseFloat(humidy)) {
-          await fetch("/contact-mailer/notification", {
+          await fetch("https://localhost:3001/contact-mailer/notification", {
             method: "POST",
+            headers: {
+              "Content-Type": "application/json", // Sử dụng "Content-Type" thay vì "contentType"
+            },
             body: JSON.stringify({
               email: email,
               value: averageValue,
@@ -127,11 +144,14 @@ export default function DashboardParams() {
           });
         }
       }
-      if (lightHistory && lightHistory.length === 10) {
+      if (lightHistory && lightHistory.length === 9) {
         const averageValue = getAverage(lightHistory);
         if (averageValue >= parseFloat(light)) {
-          await fetch("/contact-mailer/notification", {
+          await fetch("https://localhost:3001/contact-mailer/notification", {
             method: "POST",
+            headers: {
+              "Content-Type": "application/json", // Sử dụng "Content-Type" thay vì "contentType"
+            },
             body: JSON.stringify({
               email: email,
               value: averageValue,
@@ -157,7 +177,7 @@ export default function DashboardParams() {
 
     const date = moment().startOf("day").valueOf() / 1000;
     console.log(date);
-    const now = new Date().toLocaleTimeString();
+
     const urlHumidy = `/${_id}/${isNode}/dailyHumidy/${date}/highestHumidy`;
     const dataRef = ref(database, urlHumidy);
     let maxHumidy = 0;
@@ -170,6 +190,7 @@ export default function DashboardParams() {
         maxHumidy = currentValue;
         set(dataRefMax, maxHumidy);
       }
+      const now = new Date().toLocaleTimeString();
       setTimestampsHumidity((prev) => {
         const newTimestamps = [...prev, now];
         return newTimestamps.length >= 10
@@ -197,7 +218,7 @@ export default function DashboardParams() {
     if (!_id || !isNode) return;
 
     const date = moment().startOf("day").valueOf() / 1000;
-    const now = new Date().toLocaleTimeString();
+
     const urlHumidy = `/${_id}/${isNode}/dailyLight/${date}/highestLight`;
     const dataRef = ref(database, urlHumidy);
     let maxLight = 0;
@@ -210,6 +231,7 @@ export default function DashboardParams() {
         maxLight = currentValue;
         set(dataRefMaxLight, maxLight);
       }
+      const now = new Date().toLocaleTimeString();
       setTimestampsLight((prev) => {
         const newTimestamps = [...prev, now];
         return newTimestamps.length >= 10
@@ -275,7 +297,7 @@ export default function DashboardParams() {
   }, [_id, isNode]);
 
   return (
-    <div className="w-full space-y-12 flex flex-col justify-center items-center ">
+    <div className="w-full space-y-12 xs:space-y-6 flex flex-col justify-center items-center ">
       <div className="w-[80%] flex justify-end">
         <Select
           value={isNode}
@@ -283,7 +305,7 @@ export default function DashboardParams() {
             setNode(value);
           }}
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-[180px] xs:w-[130px]">
             <SelectValue placeholder="Select a node" />
           </SelectTrigger>
           <SelectContent>
@@ -297,8 +319,8 @@ export default function DashboardParams() {
           </SelectContent>
         </Select>
       </div>
-      <div className="w-[50%] flex flex-col justify-center items-center space-y-12">
-        <div className=" w-full  justify-center bg-red-100">
+      <div className="w-[50%] xs:w-[95%] flex flex-col justify-center xs:space-y-6 items-center space-y-12">
+        <div className=" w-full justify-center bg-red-100">
           <LineChartComponent
             highestValue={highestTemperature}
             title={"Nhiệt độ trung bình"}
@@ -316,7 +338,7 @@ export default function DashboardParams() {
             unit="&#37;"
           />
         </div>
-        <div className=" w-full justify-center">
+        <div className="w-full justify-center">
           <LineChartComponent
             highestValue={highestLight}
             title={"Ánh sáng trung bình"}
@@ -327,7 +349,7 @@ export default function DashboardParams() {
         </div>
       </div>
 
-      <div className="w-[50%]">
+      <div className="w-[50%] xs:w-[95%]">
         <BarChartComponent
           dataX={timestampList}
           dataHumidy={valueHumidyOfWeek}

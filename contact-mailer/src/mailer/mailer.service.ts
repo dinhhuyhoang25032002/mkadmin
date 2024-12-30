@@ -97,7 +97,11 @@ export class MailerService {
 
     async handleSendNotification(payload: { email: string; value: string; nodeId: string; type: string }) {
         const { email, value, nodeId, type } = payload
+        console.log(email, value, nodeId, type);
+        
         const user = await this.userModel.findOne({ email });
+        console.log(user);
+        
         if (!user) {
             throw new HttpException(
                 { message: 'Resource not found: user', errorCode: 404 },

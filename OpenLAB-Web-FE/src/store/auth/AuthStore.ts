@@ -1,3 +1,4 @@
+
 import { create, StateCreator } from "zustand";
 import { devtools, persist, createJSONStorage } from "zustand/middleware";
 export type nodeIdProps = {
@@ -25,6 +26,7 @@ type AuthStoreSliceProps = {
     isLoading: boolean;
     setIsAuth: (isAuth: boolean) => void;
     setUser: (user: UserProps) => void;
+    setNode: (node: nodeIdProps) => void;
     setLoading: (isLoading: boolean) => void;
 };
 
@@ -45,6 +47,14 @@ const createAuthSlice: StateCreator<AuthStoreSliceProps> = (set) => ({
     setIsAuth: (isAuth: boolean) => set(() => ({ isAuth })),
     setUser: (user: UserProps) => set(() => ({ user })),
     setLoading: (isLoading: boolean) => set(() => ({ isLoading })),
+    setNode: (node: nodeIdProps) => set((state) => ({
+        user: {
+            ...state.user,
+            nodeId: state.user.nodeId?.map((n) =>
+                n._id === node._id ? node : n
+            ),
+        },
+    })),
 });
 
 export const useAuthStore = create(

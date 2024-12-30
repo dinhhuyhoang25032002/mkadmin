@@ -20,7 +20,7 @@ const SectionSolution = () => {
           </span>
           <p className="mt-2 font-normal text-base mb-8 ">
             Các gói giải pháp được lựa chọn riêng theo từng nhu cầu, quy mô.
-            Tiêu chuẩn khẳng định vị thế tiên phong của OpenLAB
+            Tiêu chuẩn khẳng định vị thế tiên phong của MKAdmin
           </p>
           <div className=" flex sm:justify-around items-center ">
             <ul>

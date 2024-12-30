@@ -16,9 +16,13 @@ export class UsersService {
 
     async handleAddValue(payload: { temperature: string, humidy: string, light: string, nodeId: string }) {
         const { nodeId, temperature, light, humidy } = payload
-        console.log(nodeId);
-        const nodeData = await this.nodeModel.findByIdAndUpdate(nodeId, { temperature, humidy, light }).exec();
-        console.log(nodeData);
+        const data = await this.nodeModel.findByIdAndUpdate(nodeId, { temperature, humidy, light }, { new: true }).exec();
+        console.log(data);
+
+        return {
+            data,
+            status: 'success'
+        }
 
     }
 

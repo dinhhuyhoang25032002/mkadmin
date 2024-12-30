@@ -55,9 +55,7 @@ export function BarChartComponent({
 }: BarChartComponentProps) {
   const chartData = useCallback(() => {
     return dataX.map((xValue, index) => ({
-      x: moment(xValue * 1000)
-        .format("D/M")
-        ,
+      x: moment(xValue * 1000).format("D/M"),
       temperature: dataTemperature ? dataTemperature[index] : 0,
       light: dataLight ? dataLight[index] : 0,
       humidy: dataHumidy ? dataHumidy[index] : 0,
@@ -65,8 +63,8 @@ export function BarChartComponent({
   }, [dataHumidy, dataLight, dataTemperature, dataX]);
   return (
     <Card className="">
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
+      <CardHeader className="xs:p-2">
+        <CardTitle className="xs:text-lg">{title}</CardTitle>
         <CardDescription></CardDescription>
       </CardHeader>
       <CardContent>

@@ -12,28 +12,10 @@ export class CoursesService {
     private readonly courseModel: SoftDeleteModel<Course> & Model<Course>,
         @InjectModel(USER_MODEL)
         private readonly userModel: SoftDeleteModel<User> & Model<User>,
-        @InjectModel(LESSON_MODEL)
-        private readonly lessonModel: SoftDeleteModel<Lesson> & Model<Lesson>,) { }
-    async findOneCourse(payload: { slug: string, query: boolean }) {
-        const { slug, query } = payload
-        if (query) {
-            const data = await this.courseModel
-                .findOne({ slug: slug })
-                .select('_id')
-                .populate({
-                    path: 'lessons',
-                    select: 'name _id',
-                });
-
-            return this.courseModel.findOne({ slug: slug }).select('name').populate({
-                path: 'lessons',
-                select: 'name _id',
-            });
-        }
-        return this.courseModel
-            .findOne({ slug: slug })
-            .select('-users')
-            .populate({ path: 'lessons', select: 'name _id linkImage' });
+    ) { }
+    async findOneCourse(payload: { id: string }) {
+        const { id } = payload
+        return await this.courseModel.findById(id);
     }
 
     async getAllCourseActive(body: { userId: string; courseId?: Array<string> }) {

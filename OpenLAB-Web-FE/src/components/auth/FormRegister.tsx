@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "~/components/ui/button";
 import { RegisterBody, RegisterBodyType } from "~/types/Types";
-
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import {
   Form,
   FormControl,
@@ -13,21 +13,37 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-
+import { useState } from "react";
+import { handleRegister } from "~/services/Services";
+import { useToast } from "~/hooks/use-toast";
 export default function RegisterForm() {
+  const { toast } = useToast();
+  const [isShowPassword, setShowPassword] = useState<boolean>(false);
   const form = useForm<RegisterBodyType>({
     resolver: zodResolver(RegisterBody),
     defaultValues: {
       email: "",
       password: "",
       confirmPassword: "",
-      name: "",
+      fullname: "",
     },
   });
-  function onSubmit(values: RegisterBodyType) {
+  async function onSubmit(values: RegisterBodyType) {
     console.log(values);
-  }
+    const data = await handleRegister(
+      values.email,
+      values.password,
+      values.fullname
+    );
 
+    console.log(data);
+    if (data && data.status === 201) {
+      toast({
+        title: "Bạn đã đăng kí thành công",
+        description: "Hãy đăng nhập để trải nghiệm những dịch vụ tuyệt vời",
+      });
+    }
+  }
   return (
     <Form {...form}>
       <form
@@ -40,7 +56,7 @@ export default function RegisterForm() {
         </div>
         <FormField
           control={form.control}
-          name="name"
+          name="fullname"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Họ và tên</FormLabel>
@@ -71,7 +87,24 @@ export default function RegisterForm() {
             <FormItem>
               <FormLabel>Mật khẩu</FormLabel>
               <FormControl>
-                <Input placeholder="Nhập mật khẩu" {...field} />
+                <div className="relative ">
+                  <Input
+                    type={isShowPassword ? "text" : "password"}
+                    placeholder="Nhập mật khẩu"
+                    {...field}
+                  />
+                  {isShowPassword ? (
+                    <AiOutlineEyeInvisible
+                      className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer"
+                      onClick={() => setShowPassword(!isShowPassword)}
+                    />
+                  ) : (
+                    <AiOutlineEye
+                      className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer"
+                      onClick={() => setShowPassword(!isShowPassword)}
+                    />
+                  )}
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -82,9 +115,26 @@ export default function RegisterForm() {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nhập lại mật khẩu</FormLabel>
+              <FormLabel>Mật khẩu</FormLabel>
               <FormControl>
-                <Input placeholder="Nhập lại mật khẩu" {...field} />
+                <div className="relative ">
+                  <Input
+                    type={isShowPassword ? "text" : "password"}
+                    placeholder="Nhập mật khẩu"
+                    {...field}
+                  />
+                  {isShowPassword ? (
+                    <AiOutlineEyeInvisible
+                      className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer"
+                      onClick={() => setShowPassword(!isShowPassword)}
+                    />
+                  ) : (
+                    <AiOutlineEye
+                      className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer"
+                      onClick={() => setShowPassword(!isShowPassword)}
+                    />
+                  )}
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>

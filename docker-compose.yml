@@ -26,7 +26,7 @@ services:
       - "3001:3001"
     volumes:
       - ./http-gateway-api/src:/usr/src/app/src
-    command: npm run start:dev
+    command: npm run start:prod
     environment:
       - PORT=3001
       - URL_REACT_CLIENT=http://localhost
@@ -39,7 +39,7 @@ services:
     container_name: auth-service
     volumes:
       - ./auth-service/src:/usr/src/app/src
-    command: npm run start:dev
+    command: npm run start:prod
     depends_on:
       - nats
       - mongo_db
@@ -50,29 +50,29 @@ services:
     container_name: contact-service
     volumes:
       - ./contact-mailer/src:/usr/src/app/src
-    command: npm run start:dev
+    command: npm run start:prod
     depends_on:
       - nats
       - mongo_db
     restart: always
-    
-  course_service:
-    build: ./course-service
-    container_name: course-service
-    volumes:
-      - ./course-service/src:/usr/src/app/src
-    command: npm run start:dev
-    depends_on:
-      - nats
-      - mongo_db
-    restart: always
+
+  # course_service:
+  #   build: ./course-service
+  #   container_name: course-service
+  #   volumes:
+  #     - ./course-service/src:/usr/src/app/src
+  #   command: npm run start:prod
+  #   depends_on:
+  #     - nats
+  #     - mongo_db
+  #   restart: always
 
   payments_service:
     build: ./payments-service
     container_name: payments-service
     volumes:
       - ./payments-service/src:/usr/src/app/src
-    command: npm run start:dev
+    command: npm run start:prod
     depends_on:
       - nats
       - mongo_db

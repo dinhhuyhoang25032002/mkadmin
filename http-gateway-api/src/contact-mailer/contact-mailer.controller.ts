@@ -20,7 +20,6 @@ export class ContactMailerController {
     @HttpCode(HttpStatus.OK)
     async sendNotification(@Body() body: { email: string, value: string, nodeId: string, type: string }) {
         console.log(body);
-        this.natsClient.emit('sendNotification', body)
-        return
+        return this.natsClient.send('sendNotification', body)
     }
 }

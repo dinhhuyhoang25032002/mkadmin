@@ -3,5 +3,5 @@ export const getAverage = (arr: Array<string>) => {
     (temperature, val) => temperature + parseFloat(val),
     0
   );
-  return sum / arr.length;
+  return parseFloat((sum / arr.length).toFixed(2));
 };

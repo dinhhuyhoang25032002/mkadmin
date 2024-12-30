@@ -47,9 +47,11 @@ export class User extends Document {
     @Prop({ required: true })
     role: string;
 
-    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: "NodeIoT"}] })
+    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: "NodeIoT" }] })
     nodeId: Array<ObjectId>;
     
+    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }] })
+    courses: Array<ObjectId>;
 }
 
 export const USER_MODEL = User.name;

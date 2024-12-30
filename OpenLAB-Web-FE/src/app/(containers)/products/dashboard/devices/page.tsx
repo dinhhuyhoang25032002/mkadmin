@@ -19,26 +19,28 @@ export default function Page() {
     { value: "auto", title: "Tự động" },
   ];
   const nodeId = useAuthStore((state) => state.user.nodeId);
-  
+
   const [isMode, setMode] = useState("handler");
 
   return (
     <main className=" h-screen w-full">
       <div className="flex w-full space-y-5 flex-col">
-        <div className=" h-[100px] bg-green-300 flex justify-center items-center text-xl font-semibold">
-          <span className="uppercase">Điều khiển các thiết bị</span>
+        <div className=" h-[100px] xs:h-fit xs:py-2 bg-green-300 flex justify-center items-center text-xl font-semibold">
+          <span className="uppercase xs:text-base">
+            Điều khiển các thiết bị
+          </span>
         </div>
-        <div className=" bg-blue-400 px-20 py-10 flex flex-col gap-10 items-center justify-between rounded ">
-          <span className="text-xl font-semibold">
+        <div className=" bg-blue-400 px-20 xs:p-5  py-10 flex flex-col gap-10 xs:gap-5 items-center justify-between rounded ">
+          <span className="text-xl font-semibold uppercase xs:text-base">
             Thiết lập các thông số tối đa:
           </span>
-          <div className="flex gap-10 ">
+          <div className="flex gap-10 w-full justify-center items-center">
             <FormSubmit />
           </div>
         </div>
 
-        <div className="h-[400px]  boder-2 border-gray-700 flex flex-col justify-center items-center gap-10">
-          <div>
+        <div className=" boder-2 border-gray-700 flex flex-col justify-center items-center gap-10 xs:gap-5">
+          <div className="flex justify-center items-center">
             <Select
               value={isMode}
               onValueChange={(value) => {
@@ -59,7 +61,7 @@ export default function Page() {
               </SelectContent>
             </Select>
           </div>
-          <div className="flex gap-10">
+          <div className="flex gap-10 xs:flex-col">
             {nodeId?.map((item, index) => {
               return (
                 <div key={index}>

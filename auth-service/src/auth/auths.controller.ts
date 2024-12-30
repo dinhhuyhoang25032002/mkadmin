@@ -14,7 +14,7 @@ export class AuthsController {
     }
 
     @MessagePattern('handleRegister')
-    async create(@Payload() user: UserClass) {
+    async create(@Payload() user: { fullname: string, email: string, password: string }) {
         return this.authService.createOneUser(user);
     }
 

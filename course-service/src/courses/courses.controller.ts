@@ -8,7 +8,7 @@ export class CoursesController {
 
     @MessagePattern('getInforCourse')
     handleGetInforCourse(@Payload() payload: {
-        slug: string, query: boolean
+        id: string
     }) {
         console.log(payload);
         

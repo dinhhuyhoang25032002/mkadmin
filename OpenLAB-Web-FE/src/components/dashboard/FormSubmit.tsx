@@ -30,14 +30,16 @@ export default function FormSubmit() {
   const form = useForm<SubmitValueDeviceBodyType>({
     resolver: zodResolver(SubmitValueDeviceBody),
     defaultValues: {
-      temperature: "",
-      humidy: "",
-      light: "",
+      temperature: "26",
+      humidy: "74",
+      light: "65",
       nodeId: "",
     },
   });
-  const { user } = useAuthStore();
-  const { nodeId } = user;
+
+  const nodeId = useAuthStore((state) => state.user.nodeId);
+ 
+  const { setNode } = useAuthStore();
   const { toast } = useToast();
   const onSubmit = async (values: SubmitValueDeviceBodyType) => {
     console.log(values);
@@ -56,18 +58,24 @@ export default function FormSubmit() {
         }),
       })
     ).json();
-    if (res && res.success === true) {
+
+    if (res && res.status === "success") {
+      setNode({
+        _id: res.data._id,
+        temperature: res.data.temperature,
+        humidy: res.data.humidy,
+        light: res.data.light,
+      });
       toast({
         title: "Bạn đã thay đổi các giá trị thành công!",
         // description: "Hãy đăng nhập để trải nghiệm những dịch vụ tuyệt vời",
-       
       });
     }
     console.log(res);
   };
   return (
     <Form {...form}>
-      <section className="space-y-4 bg-white h-fit px-5 py-4 rounded-md">
+      <section className="space-y-4 bg-white h-fit px-5 py-4 rounded-md xs:w-full">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="h-fit py-4 flex flex-col justify-center items-center gap-4"
@@ -85,7 +93,7 @@ export default function FormSubmit() {
                     <SelectContent>
                       <SelectGroup>
                         {nodeId?.map((item, index) => (
-                          <SelectItem value={item._id} key={index}>
+                          <SelectItem value={item._id} key={item._id}>
                             node {index + 1}
                           </SelectItem>
                         ))}
@@ -93,17 +101,18 @@ export default function FormSubmit() {
                     </SelectContent>
                   </Select>
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
 
-          <div className="flex gap-4">
+          <div className="flex gap-4 xs:flex-col xs:w-full">
             <FormField
               control={form.control}
               name="temperature"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nhiệt độ</FormLabel>
+                  <FormLabel>Nhiệt độ (&deg;C)</FormLabel>
                   <FormControl>
                     <Input placeholder="Nhiệt độ tối đa " {...field} />
                   </FormControl>
@@ -116,7 +125,7 @@ export default function FormSubmit() {
               name="humidy"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Độ ẩm</FormLabel>
+                  <FormLabel>Độ ẩm (&#37;)</FormLabel>
                   <FormControl>
                     <Input placeholder="Độ ẩm tối đa" {...field} />
                   </FormControl>
@@ -129,7 +138,7 @@ export default function FormSubmit() {
               name="light"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ánh sáng</FormLabel>
+                  <FormLabel>Ánh sáng (&#37;)</FormLabel>
                   <FormControl>
                     <Input placeholder="Ánh sáng tối đa" {...field} />
                   </FormControl>

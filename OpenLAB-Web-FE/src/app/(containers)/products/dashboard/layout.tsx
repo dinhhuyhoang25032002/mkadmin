@@ -23,19 +23,19 @@ export default function DashboardLayout({
   return (
     <MainLayout coursePage={true}>
       <div
-        className={`flex w-full min-h-screen  ${
+        className={`flex w-full min-h-screen   ${
           isOpenMenu ? "justify-end px-4" : ""
         }`}
       >
         <div
-          className={`w-[19%] border-r-2 border-[#eee] z-10 bg-white transition-opacity ease-out duration-300 flex flex-col justify-between ${
+          className={`w-[19%] xs:w-1/4 border-r-2 border-[#eee] z-10 bg-white transition-opacity ease-out duration-300 flex flex-col justify-between ${
             isOpenMenu
               ? "opacity-100 fixed top-0 left-0 h-screen "
               : " opacity-0 pointer-events-none absolute left-0"
           }`}
         >
           <nav className="flex flex-col">
-            <div className="mb-5  py-4">
+            <div className="mb-5 py-4 xs:hidden ">
               <Link href={"/"} className="cursor-pointer flex flex-col">
                 <span
                   className="text-5xl xs:tracking-widest font-semibold text-center text-[#D32F2F] text-shadow-lg xs:text-4xl"
@@ -51,19 +51,19 @@ export default function DashboardLayout({
                 </span>
               </Link>
             </div>
-            <ul>
+            <ul className="flex flex-col gap-2 xs:mt-20">
               <Link href={"/products/dashboard"}>
-                <li className="flex items-center   py-2 px-4 gap-2 hover:text-blue-500 hover:bg-[#eee]">
+                <li className="flex items-center xs:px-1  py-2 px-4 gap-2 hover:text-blue-500 hover:bg-[#eee]">
                   <ChartNoAxesCombined />
                   <span>Dashboard</span>
                 </li>
               </Link>
 
-              <li className="flex items-center   hover:text-blue-500 hover:bg-[#eee] cursor-pointer">
+              <li className="flex items-center  hover:text-blue-500 hover:bg-[#eee] cursor-pointer">
                 <Dialog>
                   <DialogTrigger
                     asChild
-                    className="cursor-pointer  py-2 px-4  w-full h-full"
+                    className="cursor-pointer py-2 xs:px-1 px-4 w-full h-full"
                   >
                     <div className="flex gap-2 items-center">
                       <Calendar />
@@ -80,26 +80,26 @@ export default function DashboardLayout({
               </li>
 
               <Link href={"/products/dashboard/devices"}>
-                <li className="flex items-center  py-2 px-4 gap-2 hover:text-blue-500 hover:bg-[#eee]">
+                <li className="flex items-center  py-2 px-4 xs:px-1  gap-2 hover:text-blue-500 hover:bg-[#eee]">
                   <Settings />
                   <span>{"Settings"}</span>
                 </li>
               </Link>
             </ul>
           </nav>
-          <div className="flex items-center gap-2 mb-5 px-4">
+          <div className="flex items-center gap-2 mb-5 px-4 xs:hidden">
             <LuCopyright />
             <span className="text-sm font-normal  mr-1">
-              2024 Bản quyền thuộc về  MKAdmin
+              2024 Bản quyền thuộc về MKAdmin
             </span>
           </div>
         </div>
         <div
           className={` flex flex-col justify-center  h-full transition-all ease-out duration-300 items-center   ${
-            isOpenMenu ? "w-[81%] px-4 " : "w-full"
+            isOpenMenu ? "w-[81%] px-4 xs:w-3/4 xs:px-2" : "w-full"
           }`}
         >
-          <div className=" flex w-full  ">
+          <div className="flex w-full ">
             <button
               onClick={() => setOpenMenu(!isOpenMenu)}
               className="px-2 py-2 hover:bg-[#eee] rounded"

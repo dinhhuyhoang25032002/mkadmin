@@ -6,10 +6,10 @@ WORKDIR /app
 
 # Sao chép ứng dụng đã build từ máy của bạn vào container
 COPY .next ./.next
-COPY node_modules ./node_modules
 COPY package.json ./
+COPY package-lock.json ./
 COPY public ./public
-
+RUN npm install --only=production
 # Mở cổng 3000 để phục vụ ứng dụng
 EXPOSE 3000
 

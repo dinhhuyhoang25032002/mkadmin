@@ -5,6 +5,10 @@ export const handleLogin = (email: string, password: string) => {
     return http.post('auth/login', { email, password })
 }
 
+export const handleRegister = (email: string, password: string, fullname: string) => { 
+    return http.post('auth/sign-up', { email, password, fullname })
+}
+
 export const handleLogout = () => {
     return http.get('auth/logout')
 }

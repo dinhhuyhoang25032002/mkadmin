@@ -9,14 +9,14 @@ export class UsersController {
     @Patch('add-value')
     @HttpCode(HttpStatus.OK)
     async addValue(@Body() info: { temperature: string, humidy: string, light: string, nodeId: string }) {
-        this.natsClient.emit('handleAddValue', info);
-        return {
-            success: true,
-        };
+        console.log(info);
+        
+        return this.natsClient.send('handleAddValue', info);
+
     }
     @Put()
     @HttpCode(HttpStatus.OK)
-    async updateUserInfo(@Body() info:PartialUser) {
+    async updateUserInfo(@Body() info: PartialUser) {
         return this.natsClient.send('handleUpdateUserInfo', info);
     }
 
