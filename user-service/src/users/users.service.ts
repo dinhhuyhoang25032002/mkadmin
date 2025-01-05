@@ -23,7 +23,6 @@ export class UsersService {
             data,
             status: 'success'
         }
-
     }
 
     async handleGetUserInfo(userId: string) {

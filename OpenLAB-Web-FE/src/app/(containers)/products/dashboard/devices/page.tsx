@@ -63,6 +63,7 @@ export default function Page() {
           </div>
           <div className="flex gap-10 xs:flex-col">
             {nodeId?.map((item, index) => {
+              if (!item || !item._id) return null;
               return (
                 <div key={index}>
                   <ControlDevice

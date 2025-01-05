@@ -33,7 +33,7 @@ export default function DashboardParams() {
   const _id = useAuthStore((state) => state.user._id);
   const email = useAuthStore((state) => state.user.email);
   const nodeId = useAuthStore((state) => state.user.nodeId);
-  const [isNode, setNode] = useState(nodeId ? nodeId[0]._id : "");
+  const [isNode, setNode] = useState(nodeId ? nodeId[0]?._id : "");
   const [timestampList, setTimestampList] = useState<Array<number>>([]);
   const [valueTemperatureOfWeek, setValueTemperatureOfDay] = useState<number[]>(
     []
@@ -93,14 +93,12 @@ export default function DashboardParams() {
   }, [_id, isNode]);
 
   useEffect(() => {
-    let nameNode = 0
+    let nameNode = 0;
     const sendNotification = async () => {
-      const foundItem = nodeId?.find(
-        (item, index) => {
-          nameNode = index + 1;
-         return item._id === isNode
-        }
-      ) as nodeIdProps;
+      const foundItem = nodeId?.find((item, index) => {
+        nameNode = index + 1;
+        return item._id === isNode;
+      }) as nodeIdProps;
       if (!foundItem) return;
       const { temperature, humidy, light } = foundItem;
       if (temperatureHistory && temperatureHistory.length === 9) {
@@ -113,7 +111,7 @@ export default function DashboardParams() {
             {
               method: "POST",
               headers: {
-                "Content-Type": "application/json", // Sử dụng "Content-Type" thay vì "contentType"
+                "Content-Type": "application/json",
               },
               body: JSON.stringify({
                 email: email,
@@ -133,7 +131,7 @@ export default function DashboardParams() {
           await fetch("https://localhost:3001/contact-mailer/notification", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json", // Sử dụng "Content-Type" thay vì "contentType"
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({
               email: email,
@@ -150,7 +148,7 @@ export default function DashboardParams() {
           await fetch("https://localhost:3001/contact-mailer/notification", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json", // Sử dụng "Content-Type" thay vì "contentType"
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({
               email: email,
