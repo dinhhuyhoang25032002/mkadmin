@@ -25,16 +25,29 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
+import Image from "next/image";
 import { SubmitUserInfoBody, SubmitUserInfoBodyType } from "~/types/Types";
 import { handleUpdateUserInfo } from "~/services/Services";
 import MainLayout from "~/components/main-layout";
+import { useSWRPublic } from "~/hooks/useSWRCustom";
 export default function Page() {
   const fullName = useAuthStore((state) => state.user.fullname) ?? "";
   const email = useAuthStore((state) => state.user.email) ?? "";
   const dateOfBirth = useAuthStore((state) => state.user.dateOfBirth) ?? "";
   const address = useAuthStore((state) => state.user.address) ?? "";
+  const courseId = useAuthStore((state) => state.user.courses) ?? "";
   const { setUser, user } = useAuthStore();
+  const { data, } = useSWRPublic(
+    `courses/${courseId ? courseId[0] : ""}`
+  );
+
+  const nameCourse = data?.name ?? "";
+  const description = data?.description ?? "";
+  const price = data?.price ?? "";
+  const image = data?.image ?? "";
+  console.log("image", data, data?.image);
   const { toast } = useToast();
+
   const form = useForm<SubmitUserInfoBodyType>({
     resolver: zodResolver(SubmitUserInfoBody),
     defaultValues: {
@@ -45,9 +58,7 @@ export default function Page() {
     },
   });
   const onSubmit = async (values: SubmitUserInfoBodyType) => {
-    console.log(values);
     const data = await handleUpdateUserInfo(values);
-    console.log(data);
     if (data && data.status === 200) {
       const payload = data.payload as UserProps;
       const updatedUser: UserProps = {
@@ -78,12 +89,12 @@ export default function Page() {
   return (
     <MainLayout>
       <div>
-        <section className=" h-screen rounded-md  flex items-center justify-center">
-          <div className="space-y-4 h-fit p-4 w-1/3 shadow-2xl">
+        <section className=" h-screen rounded-md  flex items-center justify-center gap-10">
+          <div className="space-y-4 h-fit p-4 w-1/3 rounded-md shadow-2xl ">
             <div className=" flex justify-center">
               <span className="font-semibold uppercase">Thông tin cá nhân</span>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-4 ">
               <div className="flex items-center gap-4">
                 <span className="w-24">Email</span>
                 <Input
@@ -208,8 +219,33 @@ export default function Page() {
               </AlertDialogContent>
             </AlertDialog>
           </div>
-          <div>
+          <div className=" w-[30%] flex rounded-md  p-4  flex-col text-center  shadow-2xl items-center space-y-4">
             <span className="font-semibold uppercase">Gói dịch vụ</span>
+            <div>
+              {image ? (
+                <Image
+                  src={image}
+                  alt="User image"
+                  width={300}
+                  height={500}
+                  className="border-[1px] border-blue-500 rounded-md"
+                />
+              ) : (
+                <p>No image available</p>
+              )}
+            </div>
+            <div className="flex flex-col gap-2 items-start px-7">
+              <span>
+                <span className="font-semibold">Tên gói cước:</span>{" "}
+                {nameCourse}
+              </span>
+              <span className="text-start">
+                <span className="font-semibold">Mô tả:</span> {description}
+              </span>
+              <span>
+                <span className="font-semibold">Giá:</span> {price}
+              </span>
+            </div>
           </div>
         </section>
       </div>

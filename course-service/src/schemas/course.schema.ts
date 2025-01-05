@@ -28,8 +28,8 @@ export class Course extends Document {
     @Prop({ required: true })
     price: string;
 
-    // @Prop({ required: true })
-    // type: string;
+    @Prop({ required: true })
+    type: string;
 
     // @Prop({ required: true })
     // subType: string;

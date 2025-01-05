@@ -106,21 +106,18 @@ export default function DashboardParams() {
         console.log("giá trị tb", averageValue);
 
         if (averageValue >= parseFloat(temperature)) {
-          const data = await fetch(
-            "https://localhost:3001/contact-mailer/notification",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                email: email,
-                value: averageValue,
-                nodeId: `Node ${nameNode}`,
-                type: "Nhiệt độ",
-              }),
-            }
-          );
+          const data = await fetch(`/contact-mailer/notification`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: email,
+              value: averageValue,
+              nodeId: `Node ${nameNode}`,
+              type: "Nhiệt độ",
+            }),
+          });
           console.log(data);
         }
       }
@@ -128,7 +125,7 @@ export default function DashboardParams() {
       if (humidityHistory && humidityHistory.length === 9) {
         const averageValue = getAverage(humidityHistory);
         if (averageValue >= parseFloat(humidy)) {
-          await fetch("https://localhost:3001/contact-mailer/notification", {
+          await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/contact-mailer/notification`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -145,7 +142,7 @@ export default function DashboardParams() {
       if (lightHistory && lightHistory.length === 9) {
         const averageValue = getAverage(lightHistory);
         if (averageValue >= parseFloat(light)) {
-          await fetch("https://localhost:3001/contact-mailer/notification", {
+          await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/contact-mailer/notification`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

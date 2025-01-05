@@ -64,7 +64,7 @@ export default function LoginForm() {
     }
   }
   const handleLoginWithGoogle = async () => {
-    window.location.href = "https://localhost:3001/auth/google/login";
+    window.location.href = `${process.env.NEXT_PUBLIC_ENDPOINT}/auth/google/login`;
   };
   useEffect(() => {
     const handeAuth = async () => {
@@ -75,7 +75,7 @@ export default function LoginForm() {
         try {
           const dataUser = await (
             await fetch(
-              `https://localhost:3001/auth?id=${sub}&email=${email}`,
+              `${process.env.NEXT_PUBLIC_ENDPOINT}/auth?id=${sub}&email=${email}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,

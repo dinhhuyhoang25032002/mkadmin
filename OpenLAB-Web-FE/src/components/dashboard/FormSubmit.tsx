@@ -45,7 +45,7 @@ export default function FormSubmit() {
     console.log(values);
 
     const res = await (
-      await fetch("https://localhost:3001/users/add-value", {
+      await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/users/add-value`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

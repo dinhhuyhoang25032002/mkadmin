@@ -10,7 +10,6 @@ export class CoursesController {
     handleGetInforCourse(@Payload() payload: {
         id: string
     }) {
-        console.log(payload);
         
         return this.courseService.findOneCourse(payload)
     }

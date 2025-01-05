@@ -51,7 +51,7 @@ export default function RegisterForm() {
         className="space-y-4  bg-white h-fit px-5 py-4 rounded-md"
       >
         <div className="flex flex-col text-center">
-          <span className=" text-xl font-semibold">Đăng nhập</span>
+          <span className=" text-xl font-semibold">Đăng kí</span>
           <span className="">Hoàn thiện thông tin để tiếp tục</span>
         </div>
         <FormField

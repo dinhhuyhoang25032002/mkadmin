@@ -8,11 +8,8 @@ export class CoursesController {
 
   @Get(':slug')
   @HttpCode(HttpStatus.OK)
-  async findOneCourse(
-    @Param('slug') slug: string,
-    @Query('isActive') query?: boolean,
-  ) {
-    return await firstValueFrom(this.natsClient.send("getInforCourse", { slug, query }));
+  async findOneCourse(@Param('slug') id: string) {
+    return this.natsClient.send("getInforCourse", { id });
   }
 
   @HttpCode(HttpStatus.OK)
