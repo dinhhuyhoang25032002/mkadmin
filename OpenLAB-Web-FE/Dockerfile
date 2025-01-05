@@ -5,11 +5,10 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Sao chép ứng dụng đã build từ máy của bạn vào container
-COPY .next ./.next
-COPY package.json ./
-COPY package-lock.json ./
-COPY public ./public
+COPY . . 
+
 RUN npm install --only=production
+
 # Mở cổng 3000 để phục vụ ứng dụng
 EXPOSE 3000
 
