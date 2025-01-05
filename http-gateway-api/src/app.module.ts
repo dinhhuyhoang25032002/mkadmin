@@ -3,8 +3,7 @@ import { AuthsModule } from './auth/auth.module';
 import { PaymentsModule } from './payments/payments.module';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
-import { FirebaseService } from './firebase/firebase.service';
-import { FirebaseModule } from './firebase/firebase.module';
+
 import { NatsClientModule } from 'src/nats-client/nats-client.module';
 import { ContactMailerModule } from './contact-mailer/contact-mailer.module';
 import { CoursesModule } from './courses/courses.module';
@@ -15,13 +14,12 @@ import { CoursesModule } from './courses/courses.module';
       {
         isGlobal: true,
         expandVariables: true,
-        envFilePath: '.env.development.local'
+        envFilePath: '.env'
       }
     ), NatsClientModule,
-    FirebaseModule,
     ContactMailerModule,
     CoursesModule,],
   controllers: [],
-  providers: [FirebaseService],
+  providers: [],
 })
 export class AppModule { }

@@ -6,15 +6,15 @@ import * as cookieParser from 'cookie-parser';
 import * as fs from 'fs';
 import * as session from 'express-session';
 
-const httpsOptions = {
-  key: fs.readFileSync('tinamys.com+4-key.pem'),
-  cert: fs.readFileSync('tinamys.com+4.pem'),
-};
+// const httpsOptions = {
+//   key: fs.readFileSync('tinamys.com+4-key.pem'),
+//   cert: fs.readFileSync('tinamys.com+4.pem'),
+// };
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: ConfixCors,
     bodyParser: true,
-    httpsOptions
+   // httpsOptions
   });
   const PORT = 3001
   app.use(cookieParser());

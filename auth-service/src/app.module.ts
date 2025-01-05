@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
 import * as MongooseDelete from 'mongoose-delete'
+
 @Global()
 @Module({
   imports: [AuthsModule,
@@ -11,7 +12,7 @@ import * as MongooseDelete from 'mongoose-delete'
       {
         isGlobal: true,
         expandVariables: true,
-        envFilePath: '.env.development.local'
+        envFilePath: '.env'
       }
     ),
     //
