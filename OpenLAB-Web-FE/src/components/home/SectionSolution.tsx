@@ -9,7 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 const SectionSolution = () => {
   return (
-    <div className="body-section-solution py-16 px-28 bg-[#f4f7fc] sm:px-16 lg:px-20 xs:px-4 xs:py-14">
+    <div className="body-section-solution py-16 px-28 bg-[#f4f7fc]  lg:px-10 xs:px-4 sm:px-4 xs:py-14">
       <div className="content-section-solution  sm:flex-col xs:flex-col text-center flex justify-between gap-8 sm:gap-16 items-center">
         <div
           className="content-left sm:w-full xs:w-full text-start sm:text-center  w-[65%]"
@@ -18,56 +18,52 @@ const SectionSolution = () => {
           <span className="text-4xl font-bold leading-10 lg:text-3xl xs:text-2xl xs:text-center xs:w-full xs:mb-3 block">
             Các giải pháp tiên phong
           </span>
-          <p className="mt-2 font-normal text-base mb-8 ">
+          <p className="mt-2 font-normal text-base mb-8">
             Các gói giải pháp được lựa chọn riêng theo từng nhu cầu, quy mô.
             Tiêu chuẩn khẳng định vị thế tiên phong của MKAdmin
           </p>
           <div className=" flex sm:justify-around items-center ">
-            <ul>
-              <li className="flex items-center gap-2 font-medium leading-5 mb-5 text-lg xs:text-base xs:mb-3">
+            <ul className="sm:text-base">
+              <li className="flex items-center gap-2 font-medium leading-5 mb-5 text-lg xs:text-base sm:text-base  xs:mb-3">
                 <IoCheckmarkCircle className="text-blue-600" />
                 Giải pháp Lab thông minh:
                 <span className="font-semibold">OpenLab</span>
               </li>
-              <li className="flex items-center gap-2 font-medium leading-5 mb-5 text-lg xs:text-base xs:mb-3">
+              <li className="flex items-center gap-2 font-medium leading-5 mb-5  text-lg sm:text-base xs:text-base xs:mb-3">
                 <IoCheckmarkCircle className="text-blue-600" />
                 Giải pháp Trợ giảng số AI:
                 <span className="font-semibold">OpenChat</span>
               </li>
-              <li className="flex items-center gap-2 font-medium leading-5 mb-5 text-lg xs:text-base xs:mb-3">
+              <li className="flex items-center gap-2 font-medium leading-5 sm:text-base mb-5 text-lg xs:text-base xs:mb-3">
                 <IoCheckmarkCircle className="text-blue-600" />
                 Giải pháp Thực hành từ xa:
                 <span className="font-semibold">E-Lab</span>
               </li>
-              <li className="flex items-center gap-2 font-medium leading-5 mb-5 text-lg xs:text-base xs:mb-3">
+              <li className="flex items-center gap-2 font-medium leading-5 sm:text-base mb-5 text-lg xs:text-base xs:mb-3">
                 <IoCheckmarkCircle className="text-blue-600" />
                 Trục liên thông dữ liệu:
                 <span className="font-semibold">LabLink</span>
               </li>
-              <li className="flex items-center gap-2 font-medium leading-5 mb-5 text-lg xs:text-base xs:mb-3">
+              <li className="flex items-center gap-2 font-medium leading-5 sm:text-base mb-5 text-lg xs:text-base xs:mb-3">
                 <IoCheckmarkCircle className="text-blue-600" />
                 Giải pháp Quản lý thiết bị số:
                 <span className="font-semibold">E-Chip</span>
               </li>
-              <li className="flex items-center gap-2 font-medium leading-5 mb-5 text-lg xs:text-base xs:mb-3">
-                <IoCheckmarkCircle className="text-blue-600" />
-                Giải pháp Thư viện thông minh:
-                <span className="font-semibold">OpenLibrary</span>
-              </li>
-              <li className="flex items-center gap-2 font-medium leading-5 mb-5 text-lg xs:text-base xs:mb-3">
+             
+              <li className="flex items-center gap-2 font-medium leading-5 sm:text-base mb-5 text-lg xs:text-base xs:mb-3">
                 <IoCheckmarkCircle className="text-blue-600" />
                 Giải pháp Lớp học thông minh:
                 <span className="font-semibold">OpenClass</span>
               </li>
 
-              <li className="flex items-center gap-2 font-medium leading-5 mb-5 text-lg xs:text-base xs:mb-3">
+              <li className="flex items-center gap-2 font-medium leading-5 sm:text-base mb-5 text-lg xs:text-base xs:mb-3">
                 <IoCheckmarkCircle className="text-blue-600" />
                 Giải pháp Thi online:
                 <span className="font-semibold">E-Exam</span>
               </li>
             </ul>
             <Image
-              className="object-cover hover:scale-105 cursor-pointer w-[230px] h-[310px] hidden sm:flex   object-center px-3 py-3 "
+              className="object-cover hover:scale-105 cursor-pointer w-[200px] h-[250px] hidden sm:flex   object-center px-3 py-3 "
               src={imageIphone}
               alt={""}
             />

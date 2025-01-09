@@ -89,7 +89,7 @@ export default function DashboardLayout({
           </nav>
           <div className="flex items-center gap-2 mb-5 px-4 xs:hidden">
             <LuCopyright />
-            <span className="text-sm font-normal  mr-1">
+            <span className="text-sm font-normal">
               2024 Bản quyền thuộc về MKAdmin
             </span>
           </div>

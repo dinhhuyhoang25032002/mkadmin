@@ -12,9 +12,12 @@ services:
     image: nginx:alpine
     container_name: nginx
     ports:
+      - "443:443"
       - "80:80"
     volumes:
       - ./OpenLAB-Web-FE/nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt/live/quanlythietbiiot.io.vn/fullchain.pem:/etc/letsencrypt/live/quanlythietbiiot.io.vn/fullchain.pem
+      - /etc/letsencrypt/live/quanlythietbiiot.io.vn/privkey.pem:/etc/letsencrypt/live/quanlythietbiiot.io.vn/privkey.pem
     depends_on:
       - nextjs
     restart: always
@@ -26,10 +29,12 @@ services:
       - "3001:3001"
     volumes:
       - ./http-gateway-api/src:/usr/src/app/src
+      - /etc/letsencrypt/live/quanlythietbiiot.io.vn/fullchain.pem:/etc/letsencrypt/live/quanlythietbiiot.io.vn/fullchain.pem
+      - /etc/letsencrypt/live/quanlythietbiiot.io.vn/privkey.pem:/etc/letsencrypt/live/quanlythietbiiot.io.vn/privkey.pem
     command: npm run start:prod
     environment:
       - PORT=3001
-      - URL_REACT_CLIENT=http://localhost
+      - URL_REACT_CLIENT=https://quanlythietbiiot.io.vn
     depends_on:
       - nats
     restart: always
@@ -55,17 +60,6 @@ services:
       - nats
       - mongo_db
     restart: always
-
-  # course_service:
-  #   build: ./course-service
-  #   container_name: course-service
-  #   volumes:
-  #     - ./course-service/src:/usr/src/app/src
-  #   command: npm run start:prod
-  #   depends_on:
-  #     - nats
-  #     - mongo_db
-  #   restart: always
 
   payments_service:
     build: ./payments-service

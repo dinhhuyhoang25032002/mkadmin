@@ -84,13 +84,13 @@ export default function Page() {
       address: address || "",
       dateOfBirth: dateOfBirth || "",
     });
-  }, [fullName, email, dateOfBirth, form, address]);
+  }, [address, dateOfBirth, email, form, fullName]);
 
   return (
     <MainLayout>
       <div>
-        <section className=" h-screen rounded-md  flex items-center justify-center gap-10">
-          <div className="space-y-4 h-fit p-4 w-1/3 rounded-md shadow-2xl ">
+        <section className="xs:py-4 py-10 rounded-md flex items-center justify-center gap-10 xs:flex-col">
+          <div className="space-y-4 h-fit p-4 w-1/3 rounded-md shadow-2xl xs:w-[90%]">
             <div className=" flex justify-center">
               <span className="font-semibold uppercase">Thông tin cá nhân</span>
             </div>
@@ -219,7 +219,7 @@ export default function Page() {
               </AlertDialogContent>
             </AlertDialog>
           </div>
-          <div className=" w-[30%] flex rounded-md  p-4  flex-col text-center  shadow-2xl items-center space-y-4">
+          <div className=" w-[30%] xs:w-[90%] flex rounded-md  p-4  flex-col text-center  shadow-2xl items-center space-y-4">
             <span className="font-semibold uppercase">Gói dịch vụ</span>
             <div>
               {image ? (

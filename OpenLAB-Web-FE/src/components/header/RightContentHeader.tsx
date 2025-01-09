@@ -28,7 +28,7 @@ import {
 } from "~/components/ui/tooltip";
 
 export default function RightContentHeader() {
-  const { isAuth, setIsAuth, setUser } = useAuthStore();
+  const { isAuth, setIsAuth, setUser, user } = useAuthStore();
   const handleLogoutPage = async () => {
     await handleLogout();
     const resetUser = {
@@ -45,14 +45,14 @@ export default function RightContentHeader() {
     setUser(resetUser);
   };
   return (
-    <div className="content-right w-[25%] flex items-center justify-end text-lg font-medium pl-5 gap-6 sm:hidden xs:hidden">
+    <div className="content-right w-[25%] lg:w-[22%] flex items-center justify-end text-lg font-medium gap-6 sm:hidden xs:hidden pr-6">
       {isAuth === true ? (
         <>
-         
           <TooltipProvider delayDuration={100}>
             <Tooltip>
               <TooltipTrigger className="xs:w-full sm:w-full">
                 <div className="flex justify-center items-center gap-2 cursor-pointer ">
+                  {user?.fullname}{" "}
                   <RxAvatar className="cursor-pointer text-2xl" />
                 </div>
               </TooltipTrigger>
@@ -70,7 +70,7 @@ export default function RightContentHeader() {
                           Thông tin cá nhân
                         </CommandItem>
                       </Link>
-{/* 
+                      {/* 
                       <Link href="/products/courses/search-course">
                         <CommandItem className="flex items-center gap-2 cursor-pointer">
                           <MdEditCalendar />

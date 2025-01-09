@@ -7,9 +7,10 @@ import * as fs from 'fs';
 import * as session from 'express-session';
 
 const httpsOptions = {
-  key: fs.readFileSync('tinamys.com+4-key.pem'),
-  cert: fs.readFileSync('tinamys.com+4.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/quanlythietbiiot.io.vn/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/quanlythietbiiot.io.vn/fullchain.pem'),
 };
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: ConfixCors,

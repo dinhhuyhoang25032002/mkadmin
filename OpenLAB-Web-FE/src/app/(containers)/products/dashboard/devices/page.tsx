@@ -23,8 +23,8 @@ export default function Page() {
   const [isMode, setMode] = useState("handler");
 
   return (
-    <main className=" h-screen w-full">
-      <div className="flex w-full space-y-5 flex-col">
+    <main className=" w-full">
+      <div className="flex w-full space-y-5 flex-col xs:py-4 pb-10">
         <div className=" h-[100px] xs:h-fit xs:py-2 bg-green-300 flex justify-center items-center text-xl font-semibold">
           <span className="uppercase xs:text-base">
             Điều khiển các thiết bị
@@ -61,7 +61,7 @@ export default function Page() {
               </SelectContent>
             </Select>
           </div>
-          <div className="flex gap-10 xs:flex-col">
+          <div className="flex gap-10 xs:flex-col xs:px-4">
             {nodeId?.map((item, index) => {
               if (!item || !item._id) return null;
               return (

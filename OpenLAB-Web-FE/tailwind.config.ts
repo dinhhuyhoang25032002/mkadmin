@@ -10,14 +10,14 @@ const config: Config = {
 	theme: {
     	screens: {
     		xs: {
-    			max: '575px'
+    			max: '590px'
     		},
     		sm: {
-    			min: '576px',
+    			min: '591px',
     			max: '876px'
     		},
     		lg: {
-    			min: '992px',
+    			min: '877px',
     			max: '1247px'
     		},
     		xl: {

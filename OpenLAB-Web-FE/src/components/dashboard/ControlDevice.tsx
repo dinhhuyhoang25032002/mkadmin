@@ -167,10 +167,10 @@ export default function ControlDevice({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center text-center rounded space-y-5 p-4 border-2 border-gray-700">
+    <div className="flex flex-col items-center justify-center text-center rounded space-y-5 xs:p-2 p-4 border-2 border-gray-700">
       <span className="text-xl font-semibold uppercase">{title}</span>
-      <div className="flex gap-5">
-        <div className="border-2 border-gray-700 space-y-4 h-fit p-4 rounded">
+      <div className="flex gap-5 xs:gap-2">
+        <div className="border-2 border-gray-700 space-y-4 h-fit xs:p-2 p-4 rounded">
           <Light led={isLight} />
           <SwitchCustom
             value={isOpenLight}
@@ -178,7 +178,7 @@ export default function ControlDevice({
             id={`${nodeId}light`}
           />
         </div>
-        <div className="border-2 border-gray-700 space-y-4 h-fit p-4 rounded">
+        <div className="border-2 border-gray-700 space-y-4 h-fit xs:p-2 p-4 rounded">
           <div>
             <PiFanDuotone
               className={fan === 1 ? `animate-spin text-7xl ` : `text-7xl`}
@@ -190,7 +190,7 @@ export default function ControlDevice({
             value={isOpenFan}
           />
         </div>
-        <div className="border-2 border-gray-700 space-y-4 h-fit p-4 rounded">
+        <div className="border-2 border-gray-700 space-y-4 h-fit xs:p-2 p-4 rounded">
           <div className="border-[3px] border-black flex justify-center items-center h-[73px] rounded">
             <BsFan
               className={pump === 1 ? `animate-spin  text-5xl ` : `text-5xl`}

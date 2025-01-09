@@ -25,21 +25,20 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
+import { useAuthStore } from "~/store/auth/AuthStore";
 
 export default function LeftContentHeader() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const fullname = useAuthStore((state) => state.user.fullname);
   return (
-    <div
-      className="content-left w-[70%]  flex justify-end  items-center h-full gap-3
-        sm:w-full sm:justify-between relative  sm:px-14 xs:w-full xs:justify-between  xs:px-5"
-    >
+    <div className="content-left w-[70%] lg:w-[78%] flex justify-end  items-center h-full gap-3 sm:w-full sm:justify-between relative xs:w-full xs:justify-between  sm:px-5  xs:px-5">
       <div
-        className="logo flex flex-col justify-center items-center w-4/12 h-[75px]
-          sm:w-[35%] sm:items-start xs:w-[61%] xs:items-start"
+        className="logo flex flex-col justify-center items-center w-5/12 h-[75px]
+          sm:w-[50%] sm:items-start xs:w-[50%] xs:items-start"
       >
         <Link href={"/"} className="cursor-pointer flex flex-col">
           <span
-            className="text-5xl xs:tracking-widest font-semibold text-center text-[#D32F2F] text-shadow-lg xs:text-4xl"
+            className="text-5xl xs:tracking-widest font-semibold text-center text-[#D32F2F] text-shadow-lg xs:text-4xl  "
             style={{
               textShadow:
                 "rgb(106 109 129) 3px 0px 0px, rgba(0, 0, 0, 0) 4px -1px 10px, rgba(0, 0, 0, 0) 16px 1px 2px, rgba(115, 86, 86, 0) 22px 18px 30px",
@@ -52,12 +51,12 @@ export default function LeftContentHeader() {
           </span>
         </Link>
       </div>
-      <div className=" gap-4 items-center hidden xs:flex">
+      <div className=" gap-4 items-center sm:flex hidden xs:flex">
         <TooltipProvider delayDuration={100}>
           <Tooltip>
             <TooltipTrigger className="xs:w-full sm:w-full">
               <div className="flex justify-center items-center gap-2 cursor-pointer ">
-                <RxAvatar className="cursor-pointer text-2xl" />
+                {fullname} <RxAvatar className="cursor-pointer text-2xl" />
               </div>
             </TooltipTrigger>
             <TooltipContent className="px-0 py-0 bg-white ">
@@ -101,7 +100,7 @@ export default function LeftContentHeader() {
       </div>
 
       <div
-        className={`w-8/12 sm:flex-col xs:flex-col  xs:inline-flex flex text-lg font-medium justify-around items-center sm:justify-start sm:items-start xs:justify-start xs:items-start
+        className={`w-7/12 sm:flex-col xs:flex-col  xs:inline-flex flex text-lg font-medium justify-around items-center sm:justify-start sm:items-start xs:justify-start xs:items-start
               sm:bg-[#080544] xs:bg-[#080544] sm:text-[#1464cc] xs:text-[#1464cc]  sm:absolute xs:absolute sm:duration-200 xs:duration-200 sm:h-screen 
             sm:w-1/3 sm:z-20 xs:w-[45%] xs:z-20 xs:h-screen xs:right-0 xs:top-0 sm:right-0 sm:top-0 sm:transition-all xs:transition-all sm:ease-in xs:ease-in  ${
               isOpenMenu
