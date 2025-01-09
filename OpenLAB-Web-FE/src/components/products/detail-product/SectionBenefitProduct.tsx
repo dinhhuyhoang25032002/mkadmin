@@ -1,4 +1,3 @@
-
 import { dataBenefitProduct } from "~/services/data";
 
 import Image from "next/image";
@@ -14,7 +13,7 @@ const SectionBenefitProduct = ({
 }: SectionBenefitProductProps) => {
   return (
     <div>
-      <div className="px-20 flex flex-col justify-center text-center xs:px-4">
+      <div className="px-20 flex flex-col justify-center text-center xs:px-4 py-10 xs:py-3">
         <span className="text-2xl font-semibold">{title}</span>
         <p className="">{description}</p>
         <div className="flex gap-3 px-16 xs:px-4 xs:flex-col xs:gap-1">
@@ -28,9 +27,7 @@ const SectionBenefitProduct = ({
             );
           })}
         </div>
-        <div>
-          <span>Come soon</span>
-        </div>
+       
         {/* <Button className="bg-yellow-600">
           <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
           Please wait
