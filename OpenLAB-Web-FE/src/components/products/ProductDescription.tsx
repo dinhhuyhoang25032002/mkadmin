@@ -18,7 +18,7 @@ const ProductDescription = ({
   type,
   nameProduct,
   description,
-  id,
+  
 }: ProductDescriptionProps) => {
   return (
     <div className=" flex flex-col relative cursor-pointer w-[93%] xs:w-[95%]  h-[480px] rounded-xl px-4 py-4 shadow-md  item-center hover:shadow-2xl  sm:mt-4 ">
@@ -30,13 +30,7 @@ const ProductDescription = ({
         />
         <div className="flex justify-end items-center  absolute w-full h-full  top-0 left-0 opacity-0 hover:opacity-100 ">
           <Link
-            href={
-              type === "APP"
-                ? `/products/solutions/introduction/${id}`
-                : type === "COURSE"
-                ? `products/courses/introduction/${id}`
-                : `products/device-kits/introduction/${id}`
-            }
+            href="#"
             className="flex justify-center items-center w-full h-full  "
           >
             <button className="rounded-full px-4 py-2 text-white font-medium bg-gradient-to-r from-blue-900 from-0% via-cyan-800 via-58% to-sky-800 href-100%  flex gap-2 items-center hover:transition-colors  hover:text-white transition ease-in-out delay-100 ">

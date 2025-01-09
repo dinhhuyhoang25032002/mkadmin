@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { NatsClientModule } from 'src/nats-client/nats-client.module';
 import { ContactMailerModule } from './contact-mailer/contact-mailer.module';
 import { CoursesModule } from './courses/courses.module';
+
 @Global()
 @Module({
   imports: [AuthsModule, PaymentsModule, UsersModule,

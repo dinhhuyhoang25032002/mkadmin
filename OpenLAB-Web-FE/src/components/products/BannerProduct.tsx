@@ -59,7 +59,7 @@ const BannerProduct = ({
   };
 
   return (
-    <div className="flex px-20 py-16 xs:flex-col xs:px-4 bg-gradient-to-r from-blue-900 from-0% via-cyan-800 via-58% to-sky-800 to-100%">
+    <div className="flex px-20 py-16 xs:py-4 xs:flex-col xs:px-4 bg-gradient-to-r from-blue-900 from-0% via-cyan-800 via-58% to-sky-800 to-100%">
       <div className="fixed top-10 left-1/2 -translate-x-1/2 z-50">
         {isOpenAlert && urlRedict && (
           <Alert className=" bg-white">
@@ -95,7 +95,7 @@ const BannerProduct = ({
         )}
       </div>
       <div className="w-[60%] flex flex-col xs:w-full pr-16 xs:pr-0">
-        <div className=" flex gap-1">
+        <div className=" flex gap-1 xs:hidden xs:text-sm">
           <span className="text-[#D32F2F] font-semibold">Trang chủ /</span>
           <span className="text-[#D32F2F] font-semibold">Sản phẩm /</span>
           <span className="text-white font-semibold">{nameProduct}</span>
@@ -136,7 +136,7 @@ const BannerProduct = ({
 
           <AlertDialog>
             <AlertDialogTrigger className="px-5 py-3  bg-[#fff] rounded hover:bg-[#120f2d] hover:transition-colors hover:duration-300 hover:ease-in font-semibold hover:text-white">
-              Nhận Tài Liệu Giới Thiệu
+              Nhận Tài Liệu
             </AlertDialogTrigger>
             <AlertDialogContent className="bg-white rounded">
               <AlertDialogHeader>

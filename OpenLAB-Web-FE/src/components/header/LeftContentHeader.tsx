@@ -1,12 +1,11 @@
 "use client";
-import { FaAngleDown } from "react-icons/fa6";
+
 import { FiMenu } from "react-icons/fi";
 import { useState } from "react";
 import { HiXMark } from "react-icons/hi2";
 import Link from "next/link";
 import { MdLogout } from "react-icons/md";
-import { MdEditCalendar } from "react-icons/md";
-import { FiShoppingCart } from "react-icons/fi";
+
 import { IoCalculatorOutline } from "react-icons/io5";
 import { FaAddressCard } from "react-icons/fa";
 import {
@@ -19,15 +18,14 @@ import {
   CommandSeparator,
 } from "~/components/ui/command";
 import { RxAvatar } from "react-icons/rx";
-import { LuBellRing } from "react-icons/lu";
+
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
-import OptionProduct from "~/components/header/OptionProduct";
-import OptionBlog from "~/components/header/OptionBolg";
+
 export default function LeftContentHeader() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   return (
@@ -55,18 +53,6 @@ export default function LeftContentHeader() {
         </Link>
       </div>
       <div className=" gap-4 items-center hidden xs:flex">
-        <div className="relative cursor-pointer">
-          <FiShoppingCart className="text-2xl" />
-          <span className="absolute text-white text-xs font-medium block bottom-[-4px] right-[-5px] bg-red-500 z-10 w-[16px] rounded-full text-center">
-            2
-          </span>
-        </div>
-        <div className="relative cursor-pointer">
-          <LuBellRing className="text-2xl" />
-          <span className="absolute text-white text-xs font-medium block bottom-[-4px] right-[-5px] bg-red-500 z-10 w-[16px] rounded-full text-center">
-            3
-          </span>
-        </div>
         <TooltipProvider delayDuration={100}>
           <Tooltip>
             <TooltipTrigger className="xs:w-full sm:w-full">
@@ -81,18 +67,14 @@ export default function LeftContentHeader() {
                   <CommandEmpty>No results found.</CommandEmpty>
                   <CommandSeparator />
                   <CommandGroup heading="Settings">
-                    <CommandItem className="flex items-center gap-2">
-                      <FaAddressCard className="cursor-pointer " />
-                      Thông tin cá nhân
-                    </CommandItem>
-
-                    <Link href="/products/courses/search-course">
-                      <CommandItem className="flex items-center gap-2">
-                        <MdEditCalendar />
-                        Thông tin khóa học
+                    <Link href={"/user-info"}>
+                      <CommandItem className="flex items-center gap-2 cursor-pointer">
+                        <FaAddressCard className="cursor-pointer " />
+                        Thông tin cá nhân
                       </CommandItem>
                     </Link>
-                    <Link href="/products/devices-kits/search-kit">
+
+                    <Link href="/products/dashboard">
                       <CommandItem className="flex items-center gap-2">
                         <IoCalculatorOutline />
                         Thông tin Thiết bị/Kit
@@ -130,14 +112,14 @@ export default function LeftContentHeader() {
       >
         <div
           onClick={() => setIsOpenMenu(!isOpenMenu)}
-          className=" px-4 pt-2 cursor-pointer hidden sm:flex sm:justify-end  xs:flex xs:justify-end w-full"
+          className=" px-4 pt-2 cursor-pointer hidden sm:flex sm:justify-end xs:text-white  xs:flex xs:justify-end w-full"
         >
           <HiXMark />
         </div>
         <Link href="/" className=" sm:w-full xs:w-full ">
           <span
             className="cursor-pointer hover:text-[#1464cc]  block  
-              sm:px-3 sm:py-1 sm:border-b-[1px] xs:px-3 xs:py-1 xs:border-b-[1px] font-semibold "
+              sm:px-3 sm:py-1 sm:border-b-[1px] xs:px-3 xs:py-1 xs:border-b-[1px] font-semibold xs:text-white"
           >
             Trang chủ
           </span>
@@ -146,54 +128,23 @@ export default function LeftContentHeader() {
         <Link href="/about" className=" sm:w-full xs:w-full">
           <span
             className="cursor-pointer hover:text-[#1464cc] flex font-semibold
-              sm:px-3 sm:py-1 sm:border-b-[1px] xs:px-3 xs:py-1 xs:border-b-[1px]"
+              sm:px-3 sm:py-1 sm:border-b-[1px] xs:px-3 xs:py-1 xs:border-b-[1px] xs:text-white"
           >
             Giới thiệu
           </span>
         </Link>
 
-        <TooltipProvider delayDuration={100}>
-          <Tooltip>
-            <TooltipTrigger className="xs:w-full sm:w-full">
-              <span
-                className="flex items-center gap-0.5 cursor-pointer title-product hover:text-[#1464cc] font-semibold
-              sm:pl-3  sm:border-b-[1px] sm:justify-between xs:pl-3  xs:border-b-[1px] xs:justify-between sm:w-full xs:w-full"
-              >
-                <span className=" sm:py-1">Sản phẩm</span>
-                <div className="sm:px-4 sm:py-2 sm:border-l-[1px] xs:px-3 xs:py-2 xs:border-l-[1px] ">
-                  <FaAngleDown className="text-xs  icon-product " />
-                </div>
-              </span>
-            </TooltipTrigger>
-            <TooltipContent className="px-0 py-0 bg-white">
-              <OptionProduct />
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-
-        <TooltipProvider delayDuration={100}>
-          <Tooltip>
-            <TooltipTrigger className="xs:w-full sm:w-full">
-              <Link href="/blog">
-                <span
-                  className="cursor-pointer hover:text-[#1464cc] font-semibold flex items-center gap-0.5 sm:pl-3 sm:border-b-[1px] sm:justify-between  xs:pl-3  xs:border-b-[1px] xs:justify-between"
-                  data-tooltip-id="my-blog"
-                >
-                  <span className=" sm:py-1">Blog</span>
-                  <div className="sm:px-4 sm:py-2 sm:border-l-[1px] xs:px-3 xs:py-2 xs:border-l-[1px]">
-                    <FaAngleDown className="text-xs  icon-product " />
-                  </div>
-                </span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent className="bg-white">
-              <OptionBlog />
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Link href="/blog" className=" sm:w-full xs:w-full ">
+          <span
+            className="cursor-pointer xs:text-white hover:text-[#1464cc] font-semibold flex items-center gap-0.5 sm:pl-3 sm:border-b-[1px] sm:justify-between  xs:pl-3  xs:border-b-[1px] xs:justify-between"
+            data-tooltip-id="my-blog"
+          >
+            Blog
+          </span>
+        </Link>
 
         <Link href="/contact" className=" sm:w-full xs:w-full ">
-          <span className="cursor-pointer hover:text-[#1464cc] flex sm:pl-3 xs:pl-3 font-semibold">
+          <span className="cursor-pointer hover:text-[#1464cc] flex sm:pl-3 sm:border-b-[1px] sm:justify-between xs:border-b-[1px] xs:pl-3 font-semibold xs:text-white">
             Liên hệ
           </span>
         </Link>

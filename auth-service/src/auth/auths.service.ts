@@ -21,7 +21,7 @@ export class AuthsService {
     async createOneUser(user: { email: string, password: string, fullname: string }) {
         const { email, password, fullname } = user
         if (!email || !password) {
-            return new BadRequestException('Email or Password not empty');
+            return new BadRequestException('Email hoặc Password không được để trống');
         }
         const userExist = await this.userModel.findOne({ email: email })
         if (!userExist) {
@@ -37,9 +37,9 @@ export class AuthsService {
                 .catch((e) => {
                     throw new Error(e);
                 });
-            return { message: 'User created succefully' };
+            return { message: 'Bạn đã đăng kí thành công' };
         }
-        return new BadRequestException('Email already exists');
+        return new BadRequestException('Email đã tồn tại');
     }
 
     async handleLogin(user: PartialUser) {
@@ -50,18 +50,18 @@ export class AuthsService {
                 .populate({ path: 'nodeId' }).exec();
 
             if (!User) {
-                return { errmessage: new BadRequestException('Wrong credentials') }
+                return new BadRequestException('Email không tồn tại')
 
             }
             if (!User.password && User.provider !== null) {
-                return { errmessage: new BadRequestException('user is exised') }
+                return new BadRequestException('user is exised')
             }
             //Validate password
             console.log(User);
 
             let checkPassword = await compareData(password as string, User.password);
             if (!checkPassword) {
-                return new ForbiddenException("Wrong password");
+                return new ForbiddenException("Mật khẩu sai");
             }
             const userObject = User.toObject();
             delete userObject.password;

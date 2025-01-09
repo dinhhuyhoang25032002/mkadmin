@@ -1,6 +1,6 @@
-import { Button } from "~/components/ui/button";
+
 import { dataBenefitProduct } from "~/services/data";
-import { ReloadIcon } from "@radix-ui/react-icons";
+
 import Image from "next/image";
 type SectionBenefitProductProps = {
   title?: string;
@@ -14,24 +14,27 @@ const SectionBenefitProduct = ({
 }: SectionBenefitProductProps) => {
   return (
     <div>
-      <div className="px-20 flex flex-col justify-center text-center">
+      <div className="px-20 flex flex-col justify-center text-center xs:px-4">
         <span className="text-2xl font-semibold">{title}</span>
         <p className="">{description}</p>
-        <div className="flex gap-3">
+        <div className="flex gap-3 px-16 xs:px-4 xs:flex-col xs:gap-1">
           {data.map((item, index) => {
             return (
               <div className="flex flex-col" key={index}>
-                <Image src={item.image} alt="image-benefit-product" />
-                <span>{item.label}</span>
-                <p>{item.detail}</p>
+                <Image src={item.image} alt="image-benefit-product" className="h-[234px]"/>
+                <span className="text-lg font-semibold">{item.label}</span>
+                <p className=" text-justify">{item.detail}</p>
               </div>
             );
           })}
         </div>
-        <Button className="bg-yellow-600">
+        <div>
+          <span>Come soon</span>
+        </div>
+        {/* <Button className="bg-yellow-600">
           <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
           Please wait
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

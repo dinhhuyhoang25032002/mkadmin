@@ -17,6 +17,7 @@ async function bootstrap() {
     httpsOptions
   });
   const PORT = 3001
+  app.setGlobalPrefix('api');
   app.use(cookieParser());
   app.use(
     session({
@@ -31,6 +32,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   await app.listen(PORT, () => {
     console.log(`Running on PORT: ${PORT}`);
+   
   });
 
 }

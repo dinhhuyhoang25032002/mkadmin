@@ -3,10 +3,10 @@ import isMobilePhone from 'validator/es/lib/isMobilePhone';
 import { REGEX } from '../utils/constant';
 // auth
 export const RegisterBody = z.object({
-    fullname: z.string().trim().min(2,'Tối thiểu 2 kí tự').max(125),
+    fullname: z.string().trim().min(2, 'Tối thiểu 2 kí tự').max(125),
     email: z.string().email("email không hợp lệ"),
-    password: z.string().min(8).max(100).regex(REGEX, 'Mật khẩu phải chứa ít nhất 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt'),
-    confirmPassword: z.string().min(8).max(100).regex(REGEX, 'Mật khẩu phải chứa ít nhất 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt')
+    password: z.string().min(8,'Mật khẩu tối thiểu 8 kí tự').max(100).regex(REGEX, 'Mật khẩu phải chứa ít nhất 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt'),
+    confirmPassword: z.string().min(8,'Mật khẩu tối thiểu 8 kí tự').max(100).regex(REGEX, 'Mật khẩu phải chứa ít nhất 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt')
 })
     .strict()
     .superRefine(({ confirmPassword, password }, ctx) => {

@@ -13,9 +13,10 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { useState } from "react";
+import {  useState } from "react";
 import { handleRegister } from "~/services/Services";
 import { useToast } from "~/hooks/use-toast";
+
 export default function RegisterForm() {
   const { toast } = useToast();
   const [isShowPassword, setShowPassword] = useState<boolean>(false);
@@ -38,10 +39,22 @@ export default function RegisterForm() {
 
     console.log(data);
     if (data && data.status === 201) {
-      toast({
-        title: "Bạn đã đăng kí thành công",
-        description: "Hãy đăng nhập để trải nghiệm những dịch vụ tuyệt vời",
-      });
+      const payload = data.payload as { status: number; message: string };
+      if (payload) {
+        if (payload.status === 400) {
+          toast({
+            title: payload.message,
+            description: "Hãy thay đổi tên tài khoản",
+          });
+        } else {
+          toast({
+            title: payload.message,
+            description: "Hãy đăng nhập để trải nghiệm những dịch vụ tuyệt vời",
+          });
+          form.reset();
+         
+        }
+      }
     }
   }
   return (
@@ -115,7 +128,7 @@ export default function RegisterForm() {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Mật khẩu</FormLabel>
+              <FormLabel>Nhập lại mật khẩu</FormLabel>
               <FormControl>
                 <div className="relative ">
                   <Input

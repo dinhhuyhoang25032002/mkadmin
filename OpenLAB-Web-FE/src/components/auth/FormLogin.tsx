@@ -22,11 +22,13 @@ import { useSearchParams } from "next/navigation";
 import { decodeUrl } from "~/utils/encryption-url";
 import { useAuthStore, UserProps } from "~/store/auth/AuthStore";
 import { useEffect, useState } from "react";
+import { useToast } from "~/hooks/use-toast";
 import { jwtDecode } from "jwt-decode";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 export default function LoginForm() {
   const { setUser, setIsAuth } = useAuthStore();
   const router = useRouter();
+  const { toast } = useToast();
   const query = useSearchParams();
   const [isShowPassword, setShowPassword] = useState<boolean>(false);
   const form = useForm<LoginBodyType>({
@@ -40,29 +42,47 @@ export default function LoginForm() {
     const res = await handleLogin(values.email, values.password);
     const queryUrl = query?.get("back_to");
     if (res && res.status === 200 && res.payload) {
-      const payload = res.payload as UserProps;
-      // console.log(payload);
-      const user: UserProps = {
-        fullname: payload.fullname,
-        address: payload.address,
-        dateOfBirth: payload.dateOfBirth,
-        role: payload.role,
-        _id: payload._id,
-        email: payload.email,
-        nodeId: payload.nodeId,
-        accessToken: payload.accessToken,
-        courses: payload.courses,
-      };
-      setUser(user);
-      setIsAuth(true);
-      if (queryUrl) {
-        const back_to = decodeUrl(queryUrl);
-        router.push(`${back_to}`);
+      const payload = res.payload as
+        | UserProps
+        | { status: number; message: string };
+      console.log(payload);
+      if ("status" in payload) {
+        if (payload.status === 403) {
+          toast({
+            title: payload.message,
+            description: "Hãy nhập đúng  mật khẩu",
+          });
+        }
+        if (payload.status === 400) {
+          toast({
+            title: payload.message,
+            description: "Hãy nhập đúng tên tài khoản",
+          });
+        }
       } else {
-        router.replace("/");
+        const user: UserProps = {
+          fullname: payload.fullname,
+          address: payload.address,
+          dateOfBirth: payload.dateOfBirth,
+          role: payload.role,
+          _id: payload._id,
+          email: payload.email,
+          nodeId: payload.nodeId,
+          accessToken: payload.accessToken,
+          courses: payload.courses,
+        };
+        setUser(user);
+        setIsAuth(true);
+        if (queryUrl) {
+          const back_to = decodeUrl(queryUrl);
+          router.push(`${back_to}`);
+        } else {
+          router.replace("/");
+        }
       }
     }
   }
+
   const handleLoginWithGoogle = async () => {
     window.location.href = `${process.env.NEXT_PUBLIC_ENDPOINT}/auth/google/login`;
   };

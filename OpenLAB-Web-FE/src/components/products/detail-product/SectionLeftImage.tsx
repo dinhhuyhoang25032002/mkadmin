@@ -13,7 +13,7 @@ const SectionLeftImage = ({ image, data }: SectionLeftImageProps) => {
       </div>
       <div>
         <ul>
-          {data.map((item, index) => {
+          {data?.map((item, index) => {
             return (
               <li key={index}>
                 <IoMdCheckmark />
