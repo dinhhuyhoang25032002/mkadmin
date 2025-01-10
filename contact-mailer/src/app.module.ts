@@ -10,7 +10,7 @@ import { MongooseModule } from '@nestjs/mongoose';
       {
         isGlobal: true,
         expandVariables: true,
-        envFilePath: '.env'
+        envFilePath: '.env.development.local'
       }
     ),
     //

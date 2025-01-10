@@ -5,7 +5,7 @@ import { useState } from "react";
 import { HiXMark } from "react-icons/hi2";
 import Link from "next/link";
 import { MdLogout } from "react-icons/md";
-
+import { handleLogout } from "~/services/Services";
 import { IoCalculatorOutline } from "react-icons/io5";
 import { FaAddressCard } from "react-icons/fa";
 import {
@@ -32,11 +32,27 @@ export default function LeftContentHeader() {
   const [isOpenTooltip, setOpenTooltip] = useState(false);
   const fullname = useAuthStore((state) => state.user.fullname);
   const isAuth = useAuthStore((state) => state.isAuth);
+  const { setIsAuth, setUser } = useAuthStore();
+  const handleLogoutPage = async () => {
+    await handleLogout();
+    const resetUser = {
+      _id: "",
+      email: "",
+      fullname: "",
+      role: "",
+      address: "",
+      dateOfBirth: "",
+      accessToken: "",
+      course: [],
+    };
+    setIsAuth(false);
+    setUser(resetUser);
+  };
   return (
-    <div className="content-left w-[70%] lg:w-[78%] flex justify-end  items-center h-full gap-3 sm:w-full sm:justify-between relative xs:w-full xs:justify-between  sm:px-5  xs:px-5">
+    <div className="content-left w-[70%]  lg:w-[78%] flex justify-end  items-center h-full gap-3 sm:w-full sm:justify-between relative xs:w-full xs:justify-between  sm:px-5  xs:px-5">
       <div
         className="logo flex flex-col justify-center items-center w-5/12 h-[75px]
-          sm:w-[50%] sm:items-start xs:w-[50%] xs:items-start"
+          sm:w-[50%] sm:items-start xs:w-[60%] xs:items-start"
       >
         <Link href={"/"} className="cursor-pointer flex flex-col">
           <span
@@ -62,7 +78,8 @@ export default function LeftContentHeader() {
                 className="xs:w-full sm:w-full"
               >
                 <div className="flex justify-center items-center gap-2 cursor-pointer ">
-                  <span className="xs:hidden">{fullname}</span> <RxAvatar className="cursor-pointer text-2xl" />
+                  <span className="xs:hidden">{fullname}</span>{" "}
+                  <RxAvatar className="cursor-pointer text-2xl" />
                 </div>
               </TooltipTrigger>
               <TooltipContent className="px-0 py-0 bg-white ">
@@ -85,7 +102,7 @@ export default function LeftContentHeader() {
                           Thông tin Thiết bị/Kit
                         </CommandItem>
                       </Link>
-                      <Link href="/login">
+                      <Link onClick={handleLogoutPage} href="/auth">
                         <CommandItem className="flex items-center gap-2">
                           <MdLogout />
                           Đăng xuất

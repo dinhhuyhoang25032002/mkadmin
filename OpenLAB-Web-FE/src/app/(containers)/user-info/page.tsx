@@ -38,7 +38,9 @@ export default function Page() {
   const address = useAuthStore((state) => state.user.address) ?? "";
   const courseId = useAuthStore((state) => state.user.courses) ?? "";
   const { setUser, user } = useAuthStore();
-  const { data } = useSWRPublic(`courses/${courseId ? courseId[0] : "672846c13f3e0525bbf1cb60"}`);
+  const { data } = useSWRPublic(
+    `courses/${courseId ? courseId[0] : "672846c13f3e0525bbf1cb60"}`
+  );
 
   const nameCourse = data?.name ?? "";
   const description = data?.description ?? "";
@@ -240,15 +242,18 @@ export default function Page() {
                 )}
               </div>
               <div className="flex flex-col gap-2 items-start px-7">
-                <span>
-                  <span className="font-semibold">Tên gói cước:</span>{" "}
-                  {nameCourse}
+                <div className="xs:flex items-center justify-center w-full">
+                  <span className="xs:flex xs:flex-col items-center justify-center">
+                    <span className="font-semibold">Tên gói cước:</span>{" "}
+                    {nameCourse}
+                  </span>
+                </div>
+
+                <span className="text-justify">
+                  <span className="font-semibold ">Mô tả:</span> {description}
                 </span>
-                <span className="text-start">
-                  <span className="font-semibold">Mô tả:</span> {description}
-                </span>
                 <span>
-                  <span className="font-semibold">Giá:</span> {price}
+                  <span className="font-semibold">Giá:</span> {price} VND
                 </span>
               </div>
             </div>
