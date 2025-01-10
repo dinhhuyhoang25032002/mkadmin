@@ -61,6 +61,17 @@ services:
       - mongo_db
     restart: always
 
+  course_service:
+    build: ./course-service
+    container_name: course-service
+    volumes:
+      - ./course-service/src:/usr/src/app/src
+    command: npm run start:prod
+    depends_on:
+      - nats
+      - mongo_db
+    restart: always
+
   payments_service:
     build: ./payments-service
     container_name: payments-service
