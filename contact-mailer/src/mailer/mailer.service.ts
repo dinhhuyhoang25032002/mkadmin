@@ -60,21 +60,21 @@ export class MailerService {
             const mailOptions = {
                 from: process.env.SENDER_EMAIL,
                 to: 'hoangdinh2503@gmail.com',
-                subject: 'Phản hồi từ OpenLAB',
+                subject: 'Phản hồi từ MKAdmin',
                 html: `
                 <div style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #333;">
                     <p>Xin chào <strong>${fullname}</strong>,</p>
                     <p>
-                        Cảm ơn bạn đã đóng góp ý kiến cho OpenLAB. Chúng tôi đã tiếp nhận ý kiến
+                        Cảm ơn bạn đã đóng góp ý kiến cho MKAdmin. Chúng tôi đã tiếp nhận ý kiến
                         của bạn và sẽ phản hồi trong vòng 24 giờ.
                     </p>
                     <p>
                         Nếu bạn có thêm bất kỳ câu hỏi nào, vui lòng liên hệ qua email
-                        này. <strong style="color: #074069">openlab.user@gmail.com</strong>
+                        này. <strong style="color: #074069">mkadmin.user@gmail.com</strong>
                     </p>
                     <br />
                     <p>Trân trọng,</p>
-                    <p><strong>Đội ngũ OpenLAB</strong></p>
+                    <p><strong>Đội ngũ MKAdmin</strong></p>
                     <hr />
                     <footer style="font-size: 14px; color: #888;">
                         <p>Đây là email tự động, vui lòng không trả lời email này.</p>
@@ -94,7 +94,7 @@ export class MailerService {
             );
         }
     }
-
+    
     async handleSendNotification(payload: { email: string; value: string; nodeId: string; type: string }) {
         const { email, value, nodeId, type } = payload
         console.log(email, value, nodeId, type);
