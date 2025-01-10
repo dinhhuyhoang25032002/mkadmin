@@ -12,7 +12,7 @@ import * as MongooseDelete from 'mongoose-delete'
       {
         isGlobal: true,
         expandVariables: true,
-        envFilePath: '.env.development.local'
+        envFilePath: '.env'
       }
     ),
     //

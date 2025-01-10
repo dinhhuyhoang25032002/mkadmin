@@ -17,7 +17,7 @@ import { APP_GUARD } from '@nestjs/core';
       {
         isGlobal: true,
         expandVariables: true,
-        envFilePath: '.env.development.local'
+        envFilePath: '.env'
       }
     ), NatsClientModule,
     ContactMailerModule,
