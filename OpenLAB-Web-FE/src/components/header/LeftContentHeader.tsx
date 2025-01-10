@@ -30,7 +30,6 @@ import { useAuthStore } from "~/store/auth/AuthStore";
 export default function LeftContentHeader() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isOpenTooltip, setOpenTooltip] = useState(false);
-  const fullname = useAuthStore((state) => state.user.fullname);
   const isAuth = useAuthStore((state) => state.isAuth);
   return (
     <div className="content-left w-[70%] lg:w-[78%] flex justify-end  items-center h-full gap-3 sm:w-full sm:justify-between relative xs:w-full xs:justify-between  sm:px-5  xs:px-5">
@@ -62,7 +61,7 @@ export default function LeftContentHeader() {
                 className="xs:w-full sm:w-full"
               >
                 <div className="flex justify-center items-center gap-2 cursor-pointer ">
-                  {fullname} <RxAvatar className="cursor-pointer text-2xl" />
+                   <RxAvatar className="cursor-pointer text-2xl" />
                 </div>
               </TooltipTrigger>
               <TooltipContent className="px-0 py-0 bg-white ">
