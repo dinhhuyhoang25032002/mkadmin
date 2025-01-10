@@ -8,7 +8,7 @@ import { MdLogout } from "react-icons/md";
 
 import { handleLogout } from "~/services/Services";
 import { useAuthStore } from "~/store/auth/AuthStore";
-import Image from "next/image";
+
 
 import {
   Command,
@@ -19,7 +19,7 @@ import {
   CommandList,
   CommandSeparator,
 } from "~/components/ui/command";
-import aiService from "~/assets/image/service-image/Chatbot_service.png";
+
 import {
   Tooltip,
   TooltipContent,
@@ -44,6 +44,9 @@ export default function RightContentHeader() {
     setIsAuth(false);
     setUser(resetUser);
   };
+
+  console.log(isAuth);
+  
   return (
     <div className="content-right w-[25%] lg:w-[22%] flex items-center justify-end text-lg font-medium gap-6 sm:hidden xs:hidden pr-6">
       {isAuth === true ? (
@@ -99,31 +102,8 @@ export default function RightContentHeader() {
         </>
       ) : (
         <div className="flex items-center justify-end gap-12 w-full ">
-          <TooltipProvider delayDuration={100}>
-            <Tooltip>
-              <TooltipTrigger className="xs:w-full sm:w-full">
-                <div className="flex justify-center items-center gap-2 cursor-pointer ">
-                  <Image
-                    src={aiService}
-                    alt={"ai-chat"}
-                    className="w-14 h-14 object-contain "
-                  />
-                </div>
-              </TooltipTrigger>
-              <TooltipContent className="px-0 py-0 bg-white " side="bottom">
-                <Command>
-                  <CommandList>
-                    <CommandItem className="flex items-center gap-2 text-[13px]">
-                      Chat để được tư vấn về sản phẩm
-                    </CommandItem>
-                  </CommandList>
-                </Command>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-
           <Link href={"/auth"}>
-            <button className="px-5 py-2 rounded text-white bg-[#D32F2F] hover:transition-colors hover:duration-200 hover:ease-out hover:bg-[#1513be] shadow-2xl shadow-[#7A9598]">
+            <button className="px-5 py-2 rounded text-white bg-[#D32F2F] hover:transition-colors hover:duration-200 hover:ease-out hover:bg-[#1513be] shadow-2xl shadow-[#7A9598] lg:px-2">
               Đăng nhập
             </button>
           </Link>

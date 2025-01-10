@@ -34,8 +34,6 @@ export class AuthsController {
         return { message: 'Logged out succefully' };
     }
 
-
-
     @UseGuards(GoogleAuthGuard)
     @Get('google/login')
     loginWithGoogle() {
@@ -57,8 +55,7 @@ export class AuthsController {
         res.cookie('token', refreshToken,
             { httpOnly: true, secure: true, sameSite: "none", expires: new Date(Date.now() + 604800000), partitioned: true, domain: 'localhost' });
 
-        res.redirect(`http://localhost:3000/auth?token=${accessToken}`)
-
+        res.redirect(`https://quanlythietbiiot.io.vn/auth?token=${accessToken}`)
     }
 
     @UseGuards(JwtRefreshAuthGuard)

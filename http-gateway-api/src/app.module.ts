@@ -7,6 +7,8 @@ import { ConfigModule } from '@nestjs/config';
 import { NatsClientModule } from 'src/nats-client/nats-client.module';
 import { ContactMailerModule } from './contact-mailer/contact-mailer.module';
 import { CoursesModule } from './courses/courses.module';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Global()
 @Module({
@@ -19,8 +21,14 @@ import { CoursesModule } from './courses/courses.module';
       }
     ), NatsClientModule,
     ContactMailerModule,
-    CoursesModule,],
+    CoursesModule, ThrottlerModule.forRoot([{
+      ttl: 60000,
+      limit: 1000,
+    }]),],
   controllers: [],
-  providers: [],
+  providers: [{
+    provide: APP_GUARD,
+    useClass: ThrottlerGuard
+  }],
 })
 export class AppModule { }

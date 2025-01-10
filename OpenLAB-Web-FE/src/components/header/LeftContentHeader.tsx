@@ -29,7 +29,9 @@ import { useAuthStore } from "~/store/auth/AuthStore";
 
 export default function LeftContentHeader() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isOpenTooltip, setOpenTooltip] = useState(false);
   const fullname = useAuthStore((state) => state.user.fullname);
+  const isAuth = useAuthStore((state) => state.isAuth);
   return (
     <div className="content-left w-[70%] lg:w-[78%] flex justify-end  items-center h-full gap-3 sm:w-full sm:justify-between relative xs:w-full xs:justify-between  sm:px-5  xs:px-5">
       <div
@@ -51,47 +53,61 @@ export default function LeftContentHeader() {
           </span>
         </Link>
       </div>
-      <div className=" gap-4 items-center sm:flex hidden xs:flex">
-        <TooltipProvider delayDuration={100}>
-          <Tooltip>
-            <TooltipTrigger className="xs:w-full sm:w-full">
-              <div className="flex justify-center items-center gap-2 cursor-pointer ">
-                {fullname} <RxAvatar className="cursor-pointer text-2xl" />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="px-0 py-0 bg-white ">
-              <Command>
-                <CommandInput placeholder="Type a command or search..." />
-                <CommandList>
-                  <CommandEmpty>No results found.</CommandEmpty>
-                  <CommandSeparator />
-                  <CommandGroup heading="Settings">
-                    <Link href={"/user-info"}>
-                      <CommandItem className="flex items-center gap-2 cursor-pointer">
-                        <FaAddressCard className="cursor-pointer " />
-                        Thông tin cá nhân
-                      </CommandItem>
-                    </Link>
+      {isAuth === true ? (
+        <div className=" gap-4 items-center sm:flex hidden xs:flex">
+          <TooltipProvider delayDuration={100}>
+            <Tooltip open={isOpenTooltip} onOpenChange={setOpenTooltip}>
+              <TooltipTrigger
+                onClick={() => setOpenTooltip(!isOpenTooltip)}
+                className="xs:w-full sm:w-full"
+              >
+                <div className="flex justify-center items-center gap-2 cursor-pointer ">
+                  {fullname} <RxAvatar className="cursor-pointer text-2xl" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent className="px-0 py-0 bg-white ">
+                <Command>
+                  <CommandInput placeholder="Type a command or search..." />
+                  <CommandList>
+                    <CommandEmpty>No results found.</CommandEmpty>
+                    <CommandSeparator />
+                    <CommandGroup heading="Settings">
+                      <Link href={"/user-info"}>
+                        <CommandItem className="flex items-center gap-2 cursor-pointer">
+                          <FaAddressCard className="cursor-pointer " />
+                          Thông tin cá nhân
+                        </CommandItem>
+                      </Link>
 
-                    <Link href="/products/dashboard">
-                      <CommandItem className="flex items-center gap-2">
-                        <IoCalculatorOutline />
-                        Thông tin Thiết bị/Kit
-                      </CommandItem>
-                    </Link>
-                    <Link href="/login">
-                      <CommandItem className="flex items-center gap-2">
-                        <MdLogout />
-                        Đăng xuất
-                      </CommandItem>
-                    </Link>
-                  </CommandGroup>
-                </CommandList>
-              </Command>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
+                      <Link href="/products/dashboard">
+                        <CommandItem className="flex items-center gap-2">
+                          <IoCalculatorOutline />
+                          Thông tin Thiết bị/Kit
+                        </CommandItem>
+                      </Link>
+                      <Link href="/login">
+                        <CommandItem className="flex items-center gap-2">
+                          <MdLogout />
+                          Đăng xuất
+                        </CommandItem>
+                      </Link>
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+      ) : (
+        <div className="flex items-center justify-end gap-12 w-full ">
+          <Link href={"/auth"}>
+            <button className="px-5 py-2 rounded text-white bg-[#D32F2F] hover:transition-colors hover:duration-200 hover:ease-out hover:bg-[#1513be] shadow-2xl shadow-[#7A9598] lg:px-2">
+              Đăng nhập
+            </button>
+          </Link>
+        </div>
+      )}
+
       <div
         className="hidden sm:block xs:block cursor-pointer z-10 ml-1"
         onClick={() => setIsOpenMenu(!isOpenMenu)}
