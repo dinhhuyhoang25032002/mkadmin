@@ -59,7 +59,7 @@ export const readNumber = (number: number) => {
             index++;
         }
         result = (number < 0 ? "âm" : "") + result.trim() + ' đồng'
-        console.log(result[0].toUpperCase() + result.slice(1));
+       // console.log(result[0].toUpperCase() + result.slice(1));
         return result[0].toUpperCase() + result.slice(1);
     }
 }

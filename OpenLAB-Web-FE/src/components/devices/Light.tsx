@@ -3,7 +3,7 @@ type LightProps = {
   led?: string | number;
 };
 const Light = ({ led }: LightProps) => {
-  console.log(led === 1, typeof led);
+ // console.log(led === 1, typeof led);
 
   return (
     <div className="Light-container">

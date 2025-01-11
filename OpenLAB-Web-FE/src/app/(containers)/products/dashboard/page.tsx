@@ -106,7 +106,7 @@ export default function DashboardParams() {
         console.log("giá trị tb", averageValue);
 
         if (averageValue >= parseFloat(temperature)) {
-          const data = await fetch(`/contact-mailer/notification`, {
+          const data = await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/contact-mailer/notification`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -121,51 +121,49 @@ export default function DashboardParams() {
           console.log(data);
         }
       }
-
       if (humidityHistory && humidityHistory.length === 9) {
         const averageValue = getAverage(humidityHistory);
         if (averageValue >= parseFloat(humidy)) {
-          await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/contact-mailer/notification`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: email,
-              value: averageValue,
-              nodeId: isNode,
-              type: "Độ ẩm",
-            }),
-          });
+          await fetch(
+            `${process.env.NEXT_PUBLIC_ENDPOINT}/contact-mailer/notification`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: email,
+                value: averageValue,
+                nodeId: isNode,
+                type: "Độ ẩm",
+              }),
+            }
+          );
         }
       }
       if (lightHistory && lightHistory.length === 9) {
         const averageValue = getAverage(lightHistory);
         if (averageValue >= parseFloat(light)) {
-          await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/contact-mailer/notification`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: email,
-              value: averageValue,
-              nodeId: isNode,
-              type: "Ánh sáng",
-            }),
-          });
+          await fetch(
+            `${process.env.NEXT_PUBLIC_ENDPOINT}/contact-mailer/notification`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: email,
+                value: averageValue,
+                nodeId: isNode,
+                type: "Ánh sáng",
+              }),
+            }
+          );
         }
       }
     };
     sendNotification();
-  }, [
-    email,
-    humidityHistory,
-    isNode,
-    lightHistory,
-    nodeId,
-    temperatureHistory,
-  ]);
+  }, [email, humidityHistory, isNode, lightHistory, nodeId, temperatureHistory]);
 
   useEffect(() => {
     if (!_id || !isNode) return;

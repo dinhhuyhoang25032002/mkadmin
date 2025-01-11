@@ -64,7 +64,7 @@ export class PaymentsService {
 
         const createPaymentLink: ResponseCreateLinkPayment =
             await payos.createPaymentLink(requestData);
-        console.log(createPaymentLink.paymentLinkId);
+       // console.log(createPaymentLink.paymentLinkId);
 
         if (createPaymentLink) {
             const paymentLinkId = createPaymentLink.paymentLinkId;

@@ -46,7 +46,7 @@ export default function Page() {
   const description = data?.description ?? "";
   const price = data?.price ?? "";
   const image = data?.image ?? "";
-  console.log("image", data, data?.image);
+ // console.log("image", data, data?.image);
   const { toast } = useToast();
 
   const form = useForm<SubmitUserInfoBodyType>({

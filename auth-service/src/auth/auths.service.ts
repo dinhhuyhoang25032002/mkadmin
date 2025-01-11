@@ -44,7 +44,7 @@ export class AuthsService {
 
     async handleLogin(user: PartialUser) {
         try {
-            console.log('check user:', user);
+            // console.log('check user:', user);
             const { email, password } = user
             let User = await this.userModel.findOne({ email: email }).select('+password')
                 .populate({ path: 'nodeId' }).exec();
@@ -57,7 +57,7 @@ export class AuthsService {
                 return new BadRequestException('user is exised')
             }
             //Validate password
-            console.log(User);
+          //  console.log(User);
 
             let checkPassword = await compareData(password as string, User.password);
             if (!checkPassword) {
@@ -78,10 +78,10 @@ export class AuthsService {
     async handleLoginWithGoogle(user: UserFromGoogle) {
         try {
             const { email } = user;
-            console.log(email);
+           // console.log(email);
 
             let dataUser = await this.userModel.findOne({ email }).exec();
-            console.log(dataUser);
+           // console.log(dataUser);
 
             if (!dataUser) {
                 dataUser = await this.userModel.create(user);

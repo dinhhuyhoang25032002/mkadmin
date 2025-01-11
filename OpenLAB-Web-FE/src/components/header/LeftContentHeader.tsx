@@ -52,11 +52,11 @@ export default function LeftContentHeader() {
     <div className="content-left w-[70%]  lg:w-[78%] flex justify-end  items-center h-full gap-3 sm:w-full sm:justify-between relative xs:w-full xs:justify-between  sm:px-5  xs:px-5">
       <div
         className="logo flex flex-col justify-center items-center w-5/12 h-[75px]
-          sm:w-[50%] sm:items-start xs:w-[60%] xs:items-start"
+          sm:w-full sm:items-start xs:w-[60%] xs:items-start "
       >
-        <Link href={"/"} className="cursor-pointer flex flex-col">
+        <Link href={"/"} className="cursor-pointer flex flex-col ">
           <span
-            className="text-5xl xs:tracking-widest font-semibold text-center text-[#D32F2F] text-shadow-lg xs:text-4xl  "
+            className="text-5xl xs:tracking-widest font-semibold text-center text-[#D32F2F] text-shadow-lg xs:text-4xl sm:text-4xl  "
             style={{
               textShadow:
                 "rgb(106 109 129) 3px 0px 0px, rgba(0, 0, 0, 0) 4px -1px 10px, rgba(0, 0, 0, 0) 16px 1px 2px, rgba(115, 86, 86, 0) 22px 18px 30px",
@@ -116,10 +116,10 @@ export default function LeftContentHeader() {
           </TooltipProvider>
         </div>
       ) : (
-        <div className="flex items-center justify-end gap-12 w-full ">
+        <div className="xs:flex sm:flex items-center justify-end gap-12 w-full hidden">
           <Link href={"/auth"}>
             <button className="px-5 py-2 rounded text-white bg-[#D32F2F] hover:transition-colors hover:duration-200 hover:ease-out hover:bg-[#1513be] shadow-2xl shadow-[#7A9598] lg:px-2">
-              Đăng nhập
+              Đăng nhập 
             </button>
           </Link>
         </div>

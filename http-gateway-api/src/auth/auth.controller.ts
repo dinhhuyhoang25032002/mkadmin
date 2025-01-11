@@ -22,7 +22,7 @@ export class AuthsController {
     @Post('sign-up')
     @HttpCode(HttpStatus.CREATED)
     async create(@Body() user: { fullname: string, email: string, password: string }) {
-        console.log(user);
+       // console.log(user);
         return this.natsClient.send('handleRegister', user)
     }
 
@@ -49,7 +49,7 @@ export class AuthsController {
         if (!user) {
             return { message: 'Authentication with Google failed!' }
         }
-        console.log(user);
+       // console.log(user);
 
         const { accessToken, refreshToken } = await firstValueFrom(this.natsClient.send('handleLoginWithGoogle', user))
         res.cookie('token', refreshToken,
@@ -72,7 +72,7 @@ export class AuthsController {
         const {
             data, refreshToken
         } = await firstValueFrom(this.natsClient.send('handleGetInfor', query));
-        console.log(refreshToken);
+      //  console.log(refreshToken);
 
         res.cookie('token', refreshToken,
             { httpOnly: true, secure: true, sameSite: "none", expires: new Date(Date.now() + 604800000), partitioned: true, domain: 'localhost' });

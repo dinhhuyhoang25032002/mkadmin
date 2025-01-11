@@ -45,7 +45,7 @@ export default function LoginForm() {
       const payload = res.payload as
         | UserProps
         | { status: number; message: string };
-      console.log(payload);
+     // console.log(payload);
       if ("status" in payload) {
         if (payload.status === 403) {
           toast({

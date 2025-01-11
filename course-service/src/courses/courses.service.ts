@@ -15,7 +15,7 @@ export class CoursesService {
     ) { }
     async findOneCourse(payload: { id: string }) {
         const { id } = payload
-        console.log(payload);
+       // console.log(payload);
         return await this.courseModel.findById(id).select('name type image price description');
     }
 

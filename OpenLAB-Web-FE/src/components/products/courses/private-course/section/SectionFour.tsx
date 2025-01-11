@@ -65,7 +65,7 @@ export default function SectionFour({
   const previous = () => {
     sliderRef.current?.slickPrev();
   };
-  console.log(title);
+ // console.log(title);
   const subtitle = title ? title[0] : "";
   return (
     <div className="flex flex-col w-full items-center px-16   ">

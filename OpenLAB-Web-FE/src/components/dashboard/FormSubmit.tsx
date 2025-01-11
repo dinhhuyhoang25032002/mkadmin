@@ -1,6 +1,5 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
 import { useForm } from "react-hook-form";
 import {
   SubmitValueDeviceBodyType,
@@ -26,24 +25,30 @@ import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import { useAuthStore } from "~/store/auth/AuthStore";
 import { useToast } from "~/hooks/use-toast";
+
 export default function FormSubmit() {
+  const nodeId = useAuthStore((state) => state.user.nodeId);
+
+  const { setNode } = useAuthStore();
+  const { toast } = useToast();
+
+  const temperature = useAuthStore(
+    (state) => state.user.nodeId?.[0].temperature ?? ""
+  );
+  const humidy = useAuthStore((state) => state.user.nodeId?.[0].humidy ?? "");
+  const light = useAuthStore((state) => state.user.nodeId?.[0].light ?? "");
+
   const form = useForm<SubmitValueDeviceBodyType>({
     resolver: zodResolver(SubmitValueDeviceBody),
     defaultValues: {
-      temperature: "26",
-      humidy: "74",
-      light: "65",
+      temperature: temperature,
+      humidy: humidy,
+      light: light,
       nodeId: "",
     },
   });
-
-  const nodeId = useAuthStore((state) => state.user.nodeId);
  
-  const { setNode } = useAuthStore();
-  const { toast } = useToast();
   const onSubmit = async (values: SubmitValueDeviceBodyType) => {
-    console.log(values);
-
     const res = await (
       await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/users/add-value`, {
         method: "PATCH",
@@ -68,10 +73,9 @@ export default function FormSubmit() {
       });
       toast({
         title: "Bạn đã thay đổi các giá trị thành công!",
-        // description: "Hãy đăng nhập để trải nghiệm những dịch vụ tuyệt vời",
       });
     }
-    console.log(res);
+    //console.log(res);
   };
   return (
     <Form {...form}>
@@ -86,9 +90,9 @@ export default function FormSubmit() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Select {...field} onValueChange={field.onChange}>
+                  <Select {...field} onValueChange={field.onChange} >
                     <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Select a node" />
+                      <SelectValue  placeholder="Select a node" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>

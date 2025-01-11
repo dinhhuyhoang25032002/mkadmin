@@ -9,7 +9,7 @@ export class ContactMailerController {
     @Post('support')
     @HttpCode(HttpStatus.OK)
     async sendEmail(@Body() body: { email: string, phone: string, name: string, topic: string, content: string }) {
-        console.log(body);
+       // console.log(body);
         this.natsClient.emit('sendEmail', body)
         return {
             success: "true"
@@ -19,7 +19,7 @@ export class ContactMailerController {
     @Post('notification')
     @HttpCode(HttpStatus.OK)
     async sendNotification(@Body() body: { email: string, value: string, nodeId: string, type: string }) {
-        console.log(body);
+        //console.log(body);
         return this.natsClient.send('sendNotification', body)
     }
 }

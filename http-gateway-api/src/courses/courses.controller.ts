@@ -9,7 +9,7 @@ export class CoursesController {
   @Get(':slug')
   @HttpCode(HttpStatus.OK)
   async findOneCourse(@Param('slug') id: string) {
-    console.log(id);
+   // console.log(id);
     
     return this.natsClient.send("getInforCourse", { id });
   }

@@ -18,7 +18,7 @@ export class PaymentsController {
     @Post()
     @HttpCode(HttpStatus.OK)
     async handleConfirmPayment(@Body() info: RequestConfirm) {
-        console.log(info);
+       // console.log(info);
         this.natsClient.emit('handleConfirmPayment', info);
         return {
             success: true,

@@ -73,7 +73,7 @@ export default function ControlDevice({
     const date = moment().startOf("day").valueOf() / 1000;
     const urlTemperature = `/${_id}/${nodeId}/dailyTemperature/${date}/highestTemperature`;
     const dataRef = ref(database, urlTemperature);
-    console.log(isMode);
+   // console.log(isMode);
 
     if (isMode === "handler") {
       return;
@@ -98,7 +98,7 @@ export default function ControlDevice({
     const date = moment().startOf("day").valueOf() / 1000;
     const urlTemperature = `/${_id}/${nodeId}/dailyLight/${date}/highestLight`;
     const dataRef = ref(database, urlTemperature);
-    console.log(isMode);
+   // console.log(isMode);
 
     if (isMode === "handler") {
       return;
@@ -123,7 +123,7 @@ export default function ControlDevice({
     const date = moment().startOf("day").valueOf() / 1000;
     const urlHumidy = `/${_id}/${nodeId}/dailyHumidy/${date}/highestHumidy`;
     const dataRef = ref(database, urlHumidy);
-    console.log(isMode);
+   // console.log(isMode);
 
     if (isMode === "handler") {
       return;

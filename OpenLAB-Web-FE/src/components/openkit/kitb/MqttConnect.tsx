@@ -64,7 +64,7 @@ const MqttConnect = ({
         mqttClient.on("connect", () => {
           if (mqttClient.connected) {
             setConnectStatus(true);
-            console.log("Connected");
+           // console.log("Connected");
             setMqttTopicSub(`${mqttUser}/`);
             setMqttTopicPub(`${mqttUser}/`);
             setMqttTopic(`${mqttUser}`);

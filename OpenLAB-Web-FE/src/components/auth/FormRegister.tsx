@@ -30,14 +30,13 @@ export default function RegisterForm() {
     },
   });
   async function onSubmit(values: RegisterBodyType) {
-    console.log(values);
+  //  console.log(values);
     const data = await handleRegister(
       values.email,
       values.password,
       values.fullname
     );
 
-    console.log(data);
     if (data && data.status === 201) {
       const payload = data.payload as { status: number; message: string };
       if (payload) {
@@ -87,7 +86,7 @@ export default function RegisterForm() {
             <FormItem>
               <FormLabel>Tên tài khoản</FormLabel>
               <FormControl>
-                <Input placeholder="Nhập tên tài khoản" {...field} />
+                <Input placeholder="Nhập email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

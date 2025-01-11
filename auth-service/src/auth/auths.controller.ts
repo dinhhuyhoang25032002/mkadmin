@@ -26,7 +26,7 @@ export class AuthsController {
 
     @MessagePattern('handleLoginWithGoogle')
     async handleRedirect(@Payload() user: UserFromGoogle,) {
-        console.log(user);
+      //  console.log(user);
 
         return await this.authService.handleLoginWithGoogle(user)
     }

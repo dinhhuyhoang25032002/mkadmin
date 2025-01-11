@@ -84,7 +84,7 @@ export class MailerService {
 
             // Gửi email
             const result = await transporter.sendMail(mailOptions);
-            console.log({ message: 'Email sent successfully', result });
+         //   console.log({ message: 'Email sent successfully', result });
             return { message: 'Email sent successfully', result };
         } catch (error) {
             console.error('Error sending email:', error);
@@ -97,10 +97,10 @@ export class MailerService {
 
     async handleSendNotification(payload: { email: string; value: string; nodeId: string; type: string }) {
         const { email, value, nodeId, type } = payload
-        console.log(email, value, nodeId, type);
+        //console.log(email, value, nodeId, type);
 
         const user = await this.userModel.findOne({ email });
-        console.log(user);
+       // console.log(user);
 
         if (!user) {
             throw new HttpException(
@@ -154,7 +154,7 @@ export class MailerService {
 
             // Gửi email
             const result = await transporter.sendMail(mailOptions);
-            console.log({ message: 'Email sent successfully', result });
+            //console.log({ message: 'Email sent successfully', result });
             return { message: 'Email sent successfully', result };
         } catch (error) {
             console.error('Error sending email:', error);

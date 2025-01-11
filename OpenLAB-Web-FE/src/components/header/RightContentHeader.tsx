@@ -45,7 +45,7 @@ export default function RightContentHeader() {
     setUser(resetUser);
   };
 
-  console.log(isAuth);
+//  console.log(isAuth);
   
   return (
     <div className="content-right w-[25%] lg:w-[22%] flex items-center justify-end text-lg font-medium gap-6 sm:hidden xs:hidden pr-6">

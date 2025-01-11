@@ -54,13 +54,13 @@ export const useFetchApi = (url: string, options?: RequestInit) => {
       const timestampNow = new Date().getTime();
 
       if (expToken < timestampNow / 1000) {
-        console.log('is running!');
+      //  console.log('is running!');
         const refresh = await fetch(`${baseUrl}/auth/refresh-token`, {
           credentials: "include",
           method: "GET",
           headers: { "Content-Type": "application/json" },
         }).then((res) => res.json());
-        console.log('check refresh:', refresh);
+    //    console.log('check refresh:', refresh);
 
         if (refresh.statusCode === 401 || refresh.message === "Unauthorized") {
           await fetch(`${baseUrl}/auth/logout`, {
